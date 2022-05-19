@@ -9,6 +9,13 @@ use SmallRuralDog\AmisAdmin\Components\HeaderToolbar;
 class AmisAdminServiceProvider extends ServiceProvider
 {
 
+    protected array $commands = [
+
+        Console\InstallCommand::class,
+
+    ];
+
+
     protected array $routeMiddleware = [
         'admin.auth' => Middleware\Authenticate::class,
 
@@ -86,7 +93,7 @@ class AmisAdminServiceProvider extends ServiceProvider
         ], 'amis-admin.views');*/
 
         // Registering package commands.
-        // $this->commands([]);
+        $this->commands($this->commands);
     }
 
     protected function loadAdminAuthConfig(): void
