@@ -28,24 +28,31 @@ class AdminTablesSeeder extends Seeder
                 'slug' => '*',
                 'http_method' => '',
                 'http_path' => '*',
+                "order" => 0,
+                "parent_id" => 0,
             ],
             [
                 'name' => '首页',
                 'slug' => '/home*',
                 'http_method' => 'GET',
                 'http_path' => '/',
+                "order" => 1,
+                "parent_id" => 0,
             ],
             [
                 'name' => '系统',
                 'slug' => 'sys-manage',
                 'http_method' => '',
                 'http_path' => "",
+                "order" => 2,
+                "parent_id" => 0,
             ],
             [
                 'name' => '	权限管理',
                 'slug' => 'permissions',
                 'http_method' => '',
                 'http_path' => "/permissions*",
+                "order" => 3,
                 "parent_id" => 3,
             ],
             [
@@ -53,6 +60,7 @@ class AdminTablesSeeder extends Seeder
                 'slug' => 'menus',
                 'http_method' => '',
                 'http_path' => "/menus*",
+                "order" => 4,
                 "parent_id" => 3,
             ],
             [
@@ -60,6 +68,7 @@ class AdminTablesSeeder extends Seeder
                 'slug' => 'roles',
                 'http_method' => '',
                 'http_path' => "/roles*",
+                "order" => 5,
                 "parent_id" => 3,
             ],
             [
@@ -67,6 +76,7 @@ class AdminTablesSeeder extends Seeder
                 'slug' => 'admin_users',
                 'http_method' => '',
                 'http_path' => "/admin_users*",
+                "order" => 6,
                 "parent_id" => 3,
             ],
         ]);
