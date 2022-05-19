@@ -1,0 +1,13 @@
+<?php
+
+use App\Admin\Controllers\HomeController;
+use Illuminate\Routing\Router;
+
+Route::group([
+    'domain' => config('amis-admin.route.domain'),
+    'prefix' => config('amis-admin.route.prefix', 'admin'),
+    'middleware' => config('amis-admin.route.middleware'),
+], static function (Router $router) {
+    $router->get('home', [HomeController::class, 'index'])->name('admin.home');
+    $router->any("chartMock",[HomeController::class, "chartMock"])->name("admin.chartMock");
+});

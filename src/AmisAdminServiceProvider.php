@@ -30,7 +30,7 @@ class AmisAdminServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'small-rural-dog');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'amis-admin');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         if (file_exists($routes = admin_path('routes.php'))) {
             $this->loadRoutesFrom($routes);

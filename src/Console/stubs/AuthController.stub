@@ -1,0 +1,9 @@
+<?php
+
+namespace DummyNamespace;
+
+use SmallRuralDog\AmisAdmin\Controllers\AuthController as AdminAuthController;
+
+class AuthController extends AdminAuthController
+{
+}

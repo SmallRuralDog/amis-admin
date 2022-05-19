@@ -1,0 +1,10 @@
+<?php
+
+AmisAdmin::css([
+    'https://cdn.jsdelivr.net/npm/amis@1.9.1-beta.11/sdk/sdk.css',
+    'https://cdn.jsdelivr.net/npm/amis@1.9.1-beta.11/sdk/helper.css',
+    'https://cdn.jsdelivr.net/npm/amis@1.9.1-beta.11/sdk/iconfont.css',
+]);
+AmisAdmin::baseJs([
+    'https://cdn.jsdelivr.net/npm/amis@1.9.1-beta.11/sdk/sdk.js',
+]);
