@@ -1,6 +1,5 @@
 <template>
     <div class="main-logo">
-        <img src="https://www.gin-vue-admin.com/img/logo.png" alt="" :class="{'mini':menuInfo.isCollapse}">
         <div class="truncate" v-if="!menuInfo.isCollapse">{{ config.name }}</div>
     </div>
     <el-scrollbar class="main-menu-scrollbar">
