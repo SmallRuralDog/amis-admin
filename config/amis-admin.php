@@ -22,8 +22,12 @@ return [
             'title' => '官网'
         ],
         [
-            'href' => 'https://www.yuque.com/smallruraldog/laravel-vue-admin/overview',
+            'href' => 'https://github.com/SmallRuralDog/amis-admin',
             'title' => '文档'
+        ],
+        [
+            'href' => 'https://aisuda.bce.baidu.com/amis/zh-CN/docs/index',
+            'title' => 'Amis文档'
         ]
     ],
     'bootstrap' => app_path('Admin/bootstrap.php'),
