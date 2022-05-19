@@ -37,10 +37,10 @@ return new class extends Migration {
             $table->increments('id');
             $table->string('name', 50)->unique();
             $table->string('slug', 50)->unique();
-            $table->string('http_method')->nullable();
-            $table->text('http_path')->nullable();
-            $table->integer('order');
-            $table->integer('parent_id');
+            $table->json('http_method')->nullable();
+            $table->json('http_path')->nullable();
+            $table->integer('order')->default(0);
+            $table->integer('parent_id')->default(0);
             $table->timestamps();
         });
         Schema::create(config('amis-admin.database.menu_table'), function (Blueprint $table) {
@@ -48,13 +48,13 @@ return new class extends Migration {
             $table->integer('parent_id')->default(0);
             $table->integer('order')->default(0);
             $table->string('title', 50);
-            $table->string('key', 50);
-            $table->string('icon', 50);
-            $table->string('uri', 50);
-            $table->string('uri_type', 50);
-            $table->string('target', 50);
-            $table->boolean('hidden');
-            $table->json('params');
+            $table->string('key', 50)->unique();
+            $table->string('icon', 50)->nullable();
+            $table->string('uri', 50)->nullable();
+            $table->string('uri_type', 50)->default('route');
+            $table->string('target', 50)->nullable();
+            $table->boolean('hidden')->default(false);
+            $table->json('params')->nullable();
 
             $table->timestamps();
         });

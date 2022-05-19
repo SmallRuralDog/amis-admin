@@ -9,5 +9,4 @@ Route::group([
     'middleware' => config('amis-admin.route.middleware'),
 ], static function (Router $router) {
     $router->get('home', [HomeController::class, 'index'])->name('admin.home');
-    $router->any("chartMock",[HomeController::class, "chartMock"])->name("admin.chartMock");
 });

@@ -5,16 +5,11 @@ namespace DummyNamespace;
 use AmisAdmin;
 use App\Http\Controllers\Controller;
 use SmallRuralDog\AmisAdmin\Renderers\Card;
-use SmallRuralDog\AmisAdmin\Renderers\Chart;
 use SmallRuralDog\AmisAdmin\Renderers\Divider;
 use SmallRuralDog\AmisAdmin\Renderers\Flex;
-use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
-use SmallRuralDog\AmisAdmin\Renderers\Form\InputDate;
-use SmallRuralDog\AmisAdmin\Renderers\Form\InputText;
 use SmallRuralDog\AmisAdmin\Renderers\GridNav;
 use SmallRuralDog\AmisAdmin\Renderers\GridSchema;
 use SmallRuralDog\AmisAdmin\Renderers\Page;
-use SmallRuralDog\AmisAdmin\Renderers\Panel;
 use SmallRuralDog\AmisAdmin\Renderers\Progress;
 use SmallRuralDog\AmisAdmin\Renderers\Tpl;
 use SmallRuralDog\AmisAdmin\Renderers\Wrapper;
@@ -41,7 +36,6 @@ class HomeController extends Controller
                 $this->buildCard("新增用户", random_int(10000, 100000), null),
             ]),
             $this->getGridNav(),
-            $this->getChart(),
         ]);
 
         return AmisAdmin::response($page);
@@ -71,16 +65,6 @@ class HomeController extends Controller
             ->header(['title' => $title]);
     }
 
-    public function chartMock()
-    {
-
-        $path = request('path');
-
-        $url = "https://aisuda.bce.baidu.com" . $path;
-        return \Http::get($url)->json();
-
-    }
-
     private function getGridNav()
     {
         $items = [];
@@ -97,49 +81,5 @@ class HomeController extends Controller
                 'items' => $items,
             ])
             ->body(GridNav::make()->columnNum(8)->source('${items}'));
-    }
-
-
-    private function getChart(): Panel
-    {
-
-        return Panel::make()->title("数据统计")->body([
-
-            AmisForm::make()->title("过滤条件")
-                ->target("chart1,chart2,chart3,chart4")
-                ->submitOnInit(true)
-                ->className("m-b")
-                ->wrapWithPanel(false)
-                ->mode("inline")
-                ->body([
-                    InputDate::make()->name("starttime")->label("开始日期")->value("-8days")->maxDate('${endtime}'),
-                    InputDate::make()->name("endtime")->label("结束日期")->value("-1days")->minDate('${starttime}'),
-                    InputText::make()->name("name")->label("条件")->addOn(['type' => 'submit', 'label' => '查询'])
-                ]),
-            GridSchema::make()
-                ->columns([
-                    Chart::make()
-                        ->name('chart1')
-                        ->initFetch(false)
-                        ->api(route('admin.chartMock', ['path' => '/amis/api/mock2/chart/chart2?name=$name&starttime=${starttime}&endtime=${endtime}']))->lg(6),
-                    Chart::make()
-                        ->name('chart2')
-                        ->initFetch(false)
-                        ->height(150)
-                        ->api(route('admin.chartMock', ['path' => '/amis/api/mock2/chart/chart2?name=$name']))->lg(6),
-
-                    Chart::make()
-                        ->name('chart3')
-                        ->initFetch(false)
-                        ->height(150)
-                        ->api(route('admin.chartMock', ['path' => '/amis/api/mock2/chart/chart1?name=$name']))->lg(6),
-
-                    Chart::make()
-                        ->name('chart4')
-                        ->initFetch(false)
-                        ->height(150)
-                        ->api(route('admin.chartMock', ['path' => '/amis/api/mock2/chart/chart1?name=$name']))->lg(6),
-                ]),
-        ]);
     }
 }

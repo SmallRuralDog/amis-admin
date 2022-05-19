@@ -22,64 +22,51 @@ class AdminTablesSeeder extends Seeder
         AdminUser::first()->roles()->save(Role::first());
 
         Permission::truncate();
-        Permission::insert([
-            [
-                'name' => '所有权限',
-                'slug' => '*',
-                'http_method' => '',
-                'http_path' => '*',
-                "order" => 0,
-                "parent_id" => 0,
-            ],
+        collect([
             [
                 'name' => '首页',
-                'slug' => '/home*',
-                'http_method' => 'GET',
-                'http_path' => '/',
+                'slug' => 'home',
+                'http_method' => ['GET'],
+                'http_path' => ['/home*'],
                 "order" => 1,
                 "parent_id" => 0,
             ],
             [
                 'name' => '系统',
                 'slug' => 'sys-manage',
-                'http_method' => '',
-                'http_path' => "",
                 "order" => 2,
                 "parent_id" => 0,
             ],
             [
                 'name' => '	权限管理',
                 'slug' => 'permissions',
-                'http_method' => '',
-                'http_path' => "/permissions*",
+                'http_path' => ["/permissions*"],
                 "order" => 3,
-                "parent_id" => 3,
+                "parent_id" => 2,
             ],
             [
                 'name' => '	菜单管理',
                 'slug' => 'menus',
-                'http_method' => '',
-                'http_path' => "/menus*",
+                'http_path' => ["/menus*"],
                 "order" => 4,
-                "parent_id" => 3,
+                "parent_id" => 2,
             ],
             [
                 'name' => '	角色管理',
                 'slug' => 'roles',
-                'http_method' => '',
-                'http_path' => "/roles*",
+                'http_path' => ["/roles*"],
                 "order" => 5,
-                "parent_id" => 3,
+                "parent_id" => 2,
             ],
             [
                 'name' => '	后台用户管理',
                 'slug' => 'admin_users',
-                'http_method' => '',
-                'http_path' => "/admin_users*",
+                'http_path' => ["/admin_users*"],
                 "order" => 6,
-                "parent_id" => 3,
+                "parent_id" => 2,
             ],
-        ]);
+        ])->each(fn($item) => Permission::create($item));
+
         Role::first()->permissions()->save(Permission::first());
         Menu::truncate();
         Menu::insert([

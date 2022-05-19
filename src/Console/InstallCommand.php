@@ -13,7 +13,7 @@ class InstallCommand extends Command
 
     protected string $directory = '';
 
-    public function handle()
+    public function handle(): void
     {
         $this->initDatabase();
         $this->initAdminDirectory();
@@ -55,7 +55,7 @@ class InstallCommand extends Command
         $contents = $this->getStub('HomeController');
         $this->laravel['files']->put(
             $homeController,
-            str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
+            str_replace('DummyNamespace', config('amis-admin.route.namespace'), $contents)
         );
         $this->line('<info>HomeController file was created:</info> ' . str_replace(base_path(), '', $homeController));
     }
@@ -66,7 +66,7 @@ class InstallCommand extends Command
         $contents = $this->getStub('AuthController');
         $this->laravel['files']->put(
             $authController,
-            str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
+            str_replace('DummyNamespace', config('amis-admin.route.namespace'), $contents)
         );
         $this->line('<info>AuthController file was created:</info> ' . str_replace(base_path(), '', $authController));
     }
@@ -83,7 +83,7 @@ class InstallCommand extends Command
     {
         $file = $this->directory . '/routes.php';
         $contents = $this->getStub('routes');
-        $this->laravel['files']->put($file, str_replace('DummyNamespace', config('admin.route.namespace'), $contents));
+        $this->laravel['files']->put($file, str_replace('DummyNamespace', config('amis-admin.route.namespace'), $contents));
         $this->line('<info>Routes file was created:</info> ' . str_replace(base_path(), '', $file));
     }
 
