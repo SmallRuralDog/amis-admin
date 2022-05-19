@@ -1,0 +1,47 @@
+{
+    "name": "smallruraldog/amis-admin",
+    "description": ":package_description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Author Name",
+            "email": "author@email.com",
+            "homepage": "http://author.com"
+        }
+    ],
+    "homepage": "https://github.com/small-rural-dog/amis-admin",
+    "keywords": [
+        "Laravel",
+        "AmisAdmin"
+    ],
+    "require": {
+        "illuminate/support": "~8|~9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SmallRuralDog\\AmisAdmin\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmallRuralDog\\AmisAdmin\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SmallRuralDog\\AmisAdmin\\AmisAdminServiceProvider"
+            ],
+            "aliases": {
+                "AmisAdmin": "SmallRuralDog\\AmisAdmin\\Facades\\AmisAdmin"
+            }
+        }
+    }
+}

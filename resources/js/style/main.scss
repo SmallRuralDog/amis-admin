@@ -1,0 +1,146 @@
+:root {
+    --body-bg: #f9f9f9 !important;
+    //--Page-main-bg: #f9f9f9 !important;
+
+    --Panel-boxShadow: none !important;
+    --Panel-marginBottom: 0 !important;
+    --Table-fixedTop-boxShadow: none !important;
+}
+
+$header-h: 48px;
+$bg-menu: #111827;
+
+body {
+    background: white;
+    margin: 0;
+}
+
+#app {
+    .el-aside {
+        height: 100vh;
+        background-color: $bg-menu;
+    }
+
+    .main-drawer {
+        background-color: $bg-menu;
+
+        .el-drawer__body {
+            height: 100vh;
+            padding: 0;
+        }
+    }
+
+    .main-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: $bg-menu;
+
+        img {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        img.mini {
+
+        }
+
+        div {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        height: $header-h;
+    }
+
+    .main-menu-scrollbar {
+        height: calc(100vh - #{$header-h});
+        overflow-x: hidden;
+
+        .is-horizontal {
+            display: none;
+        }
+    }
+
+    .el-menu {
+        //min-height: calc(100vh - #{$header-h});
+        border-right: none;
+    }
+
+    .mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    .el-header {
+        background: var(--Layout-header-bg);
+        height: $header-h;
+
+        .main-header {
+            height: $header-h;
+        }
+    }
+
+    .el-main {
+        padding: 0;
+
+        .amis-page {
+            height: calc(100vh - #{$header-h});
+        }
+    }
+
+    .main-content {
+        height: calc(100vh - #{$header-h});
+    }
+
+
+    .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+    }
+
+    .truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
+    .cxd-Crud {
+
+    }
+
+    .el-header {
+        .amis-scope {
+            overflow-x: unset !important;
+        }
+    }
+
+    .bg-search {
+        background-color: var(--Layout-header-bg);
+    }
+
+    .amis-scope {
+        .cxd-Form--quickEdit {
+            min-width: auto;
+        }
+
+        .cxd-Card-body, .cxd-Card-heading {
+            padding: 12px;
+        }
+    }
+}
+
+.icon-mr {
+    margin-right: 5px !important;
+}
