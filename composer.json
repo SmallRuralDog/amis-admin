@@ -1,20 +1,21 @@
 {
     "name": "smallruraldog/amis-admin",
-    "description": ":package_description",
+    "description": "amis admin",
     "license": "MIT",
     "authors": [
         {
-            "name": "Author Name",
-            "email": "author@email.com",
-            "homepage": "http://author.com"
+            "name": "SmallRuralDog",
+            "email": "296404875@qq.com",
+            "homepage": "https://github.com/SmallRuralDog"
         }
     ],
-    "homepage": "https://github.com/small-rural-dog/amis-admin",
+    "homepage": "https://github.com/SmallRuralDog/amis-admin",
     "keywords": [
         "Laravel",
         "AmisAdmin"
     ],
     "require": {
+        "php": ">=8.0",
         "illuminate/support": "~8|~9"
     },
     "require-dev": {
