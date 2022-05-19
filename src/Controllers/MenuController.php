@@ -109,7 +109,9 @@ class MenuController extends AdminController
                             ['value' => '_blank', 'label' => '新窗口'],
                         ]))->value('_self')->columnRatio(2)->labelRemark("外部连接类型有效"),
 
-                    $form->item('uri', '路由')->useFormItem()->visibleOn("data.uri_type=='route'"),
+                    $form->item('uri', '路由')
+                        ->description("注意：不要使用二级目录,否则菜单无法自动选中")
+                        ->useFormItem()->visibleOn("data.uri_type=='route'"),
                     $form->item('uri', '外部链接')->useFormItem()->type("input-url")->clearable(true)->visibleOn("data.uri_type=='url'")->placeholder("https://xxx.xxx.xxx.xxx"),
 
                 ]),

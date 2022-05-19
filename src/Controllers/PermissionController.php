@@ -39,6 +39,7 @@ class PermissionController extends AdminController
                 ->expandConfig([
                     'expand' => 'all'
                 ])
+                ->columnsTogglable(false)
                 ->perPage(100)
                 ->keepItemSelectionOnPageChange(true);
 
@@ -53,12 +54,16 @@ class PermissionController extends AdminController
             $grid->column('http_path', "路由")
                 ->useTableColumn(Each::make()->items(Tpl::make()->tpl("<span class='label label-default m-l-sm'><%= this.item %></span>")));
 
+            $grid->column('menus', "菜单")
+                ->useTableColumn(Each::make()->items(Tpl::make()->tpl("<span class='label label-success m-l-sm'><%= this.title %></span>")));
+
 
             $grid->dialogForm('lg');
 
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->wrapWithPanel(false)->className('mb-3 bg-search p-2 pt-3');
                 $filter->like('slug', "标识")->useFormItem()->clearable(true)->size("sm");
+                $filter->like('name', "名称")->useFormItem()->clearable(true)->size("sm");
             });
 
             $grid->actions(function (Grid\Actions $actions) {
