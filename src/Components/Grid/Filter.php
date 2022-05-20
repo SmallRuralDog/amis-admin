@@ -63,7 +63,7 @@ class Filter extends AmisForm
         return $items;
     }
 
-    public function where($name, $label = '', $fun = null): Item
+    public function where($name, $label = '', Closure $fun = null): Item
     {
         $this->addField($name, 'where', $fun);
         return $this->addItem($name, $label);
@@ -71,7 +71,6 @@ class Filter extends AmisForm
 
     public function eq($name, $label = ''): Item
     {
-
         $this->addField($name, 'eq');
         return $this->addItem($name, $label);
     }
@@ -88,39 +87,16 @@ class Filter extends AmisForm
         return $this->addItem($name, $label);
     }
 
-    public function in($name, $label)
+    public function in($name, $label): Item
     {
-
+        $this->addField($name, 'in');
+        return $this->addItem($name, $label);
     }
 
-    public function notIn($name, $label)
+    public function notIn($name, $label): Item
     {
-
-    }
-
-    public function date($name, $label)
-    {
-
-    }
-
-    public function datetime($name, $label)
-    {
-
-    }
-
-    public function time($name, $label)
-    {
-
-    }
-
-    public function month($name, $label)
-    {
-
-    }
-
-    public function year($name, $label)
-    {
-
+        $this->addField($name, 'notIn');
+        return $this->addItem($name, $label);
     }
 
 }

@@ -90,6 +90,15 @@ class Model
                 case 'like':
                     $this->builder->where($fieldName, 'like', "%$value%");
                     break;
+                case 'between':
+                    $this->builder->whereBetween($fieldName, $value);
+                    break;
+                case 'in':
+                    $this->builder->whereIn($fieldName, $value);
+                    break;
+                case 'notIn':
+                    $this->builder->whereNotIn($fieldName, $value);
+                    break;
             }
         }
     }
