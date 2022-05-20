@@ -5,7 +5,7 @@
 [Amis文档](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)。
 
 ## 什么是 amis
-[Amis](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index) 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。
+[Amis](https://github.com/baidu/amis) 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。
 ## 与 `Laravel Admin` `Dcat Admin`的异同
 我一直在用这两个，很强大，大大提高了项目开发的效率，但是在一些复杂的自定义功能时，官方所提供的相关组件不是很好实现
 
@@ -23,10 +23,6 @@
 
 - PHP >= 8.0
 - Laravel >= 8
-
-## 使用前
-
-基于amis的管理后台，需要熟悉amis的使用方法。建议先阅读[amis文档](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)。
 
 ## 安装
 
