@@ -4,6 +4,7 @@ namespace SmallRuralDog\AmisAdmin\Controllers;
 
 use AmisAdmin;
 use App\Http\Controllers\Controller;
+use Crypt;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,6 +12,29 @@ use Storage;
 
 class HandleController extends Controller
 {
+
+    public function action()
+    {
+        try {
+            $data = request()?->all();
+            $validator = AmisAdmin::validatorData($data, [
+                'action' => 'required|string',
+                'class' => 'required|string',
+                'params' => 'required|array',
+            ]);
+            if ($validator->fails()) {
+                abort(400, $validator->errors()->first());
+            }
+            $class = Crypt::decryptString($data['class']);
+            $action = $data['action'];
+            $params = $data['params'];
+            $res = (new $class())->$action($params);
+            return $res ?? AmisAdmin::responseMessage('请求成功');
+        } catch (Exception $e) {
+            return AmisAdmin::responseError($e->getMessage());
+        }
+    }
+
 
     public function menu(): JsonResponse
     {
