@@ -2,9 +2,11 @@
 
 namespace SmallRuralDog\AmisAdmin\Controllers;
 
+use AmisAdmin;
 use Illuminate\Database\Eloquent\Model;
 use SmallRuralDog\AmisAdmin\Components\Form;
 use SmallRuralDog\AmisAdmin\Components\Grid;
+use SmallRuralDog\AmisAdmin\Renderers\Action\AjaxAction;
 use SmallRuralDog\AmisAdmin\Renderers\Avatar;
 use SmallRuralDog\AmisAdmin\Renderers\Date;
 use SmallRuralDog\AmisAdmin\Renderers\Each;
@@ -36,6 +38,12 @@ class AdminUserController extends AdminController
                 ->useTableColumn(Date::make()->datetime());
             $grid->actions(function (Grid\Actions $actions) {
                 $actions->rowAction();
+
+                $actions->callDeleteAction(function (AjaxAction $action) {
+                    $id = AmisAdmin::user()?->getKey();
+                    $action->hiddenOn("id==$id"); //这里使用了显隐判断
+                });
+
             });
         });
     }

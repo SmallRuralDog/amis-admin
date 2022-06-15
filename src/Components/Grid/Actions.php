@@ -2,6 +2,7 @@
 
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
+use Closure;
 use SmallRuralDog\AmisAdmin\Components\Grid;
 use SmallRuralDog\AmisAdmin\Renderers\Action\AjaxAction;
 use SmallRuralDog\AmisAdmin\Renderers\Action\LinkAction;
@@ -25,19 +26,31 @@ class Actions
 
     protected float|string $width = 150;
 
+    protected ?Closure $callDeleteActionFun = null;
+
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
     }
 
 
-    private function buildDeleteAction(): Button
+    private function buildDeleteAction()
     {
 
         $keyName = $this->grid->getPrimaryKey();
         $api = $this->grid->getDestroyUrl('${' . $keyName . '}');
         return AjaxAction::make()->label("删除")
             ->level("link")->confirmText("确定要删除？")->api($api)->className('text-danger')->icon('fa fa-trash-can icon-mr');
+    }
+
+    /**
+     * 处理删除操作
+     * @param Closure $closure
+     * @return void
+     */
+    public function callDeleteAction(Closure $closure): void
+    {
+        $this->callDeleteActionFun = $closure;
     }
 
     private function buildEditAction(): Button
@@ -137,7 +150,11 @@ class Actions
             $actions->add($this->buildEditAction());
         }
         if (!$this->disableDeleteAction) {
-            $actions->add($this->buildDeleteAction());
+            $disableDeleteAction = $this->buildDeleteAction();
+            if ($this->callDeleteActionFun) {
+                call_user_func($this->callDeleteActionFun, $disableDeleteAction);
+            }
+            $actions->add($disableDeleteAction);
         }
 
         return $actions->toArray();
