@@ -5,6 +5,8 @@ namespace SmallRuralDog\AmisAdmin;
 use Arr;
 use Illuminate\Support\ServiceProvider;
 use SmallRuralDog\AmisAdmin\Components\HeaderToolbar;
+use SmallRuralDog\AmisAdmin\Extensions\SettingEloquentStorage;
+use SmallRuralDog\AmisAdmin\Extensions\SettingStorage;
 
 class AmisAdminServiceProvider extends ServiceProvider
 {
@@ -37,7 +39,7 @@ class AmisAdminServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'small-rural-dog');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'amis-admin');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         if (file_exists($routes = admin_path('routes.php'))) {
             $this->loadRoutesFrom($routes);
@@ -62,6 +64,8 @@ class AmisAdminServiceProvider extends ServiceProvider
             return new AmisAdmin;
         });
         $this->app->singleton('amis-admin.headerToolbar', HeaderToolbar::class);
+
+        $this->app->bind(SettingStorage::class, SettingEloquentStorage::class);
     }
 
     public function provides(): array
@@ -84,7 +88,7 @@ class AmisAdminServiceProvider extends ServiceProvider
 
         // Publishing assets.
         $this->publishes([
-            __DIR__.'/../resources/dist' => public_path('vendor/admin'),
+            __DIR__ . '/../resources/dist' => public_path('vendor/admin'),
         ], 'amis-admin.assets');
 
         // Publishing the translation files.

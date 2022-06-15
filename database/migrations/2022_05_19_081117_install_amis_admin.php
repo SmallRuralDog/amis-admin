@@ -83,6 +83,11 @@ return new class extends Migration {
             $table->index(['permission_id', 'menu_id']);
             $table->timestamps();
         });
+        Schema::create(config('amis-admin.database.settings_table'), function (Blueprint $table) {
+            $table->text('slug')->primary();
+            $table->json('value');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -100,5 +105,6 @@ return new class extends Migration {
         Schema::dropIfExists(config('amis-admin.database.role_permissions_table'));
         Schema::dropIfExists(config('amis-admin.database.role_menu_table'));
         Schema::dropIfExists(config('amis-admin.database.permission_menu_table'));
+        Schema::dropIfExists(config('amis-admin.database.settings_table'));
     }
 };

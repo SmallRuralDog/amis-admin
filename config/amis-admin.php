@@ -9,7 +9,7 @@ return [
     'name' => 'Amis-Admin',
     'title' => 'Amis-Admin',
     //登录界面
-    'loginLogo' =>'',
+    'loginLogo' => '',
     'loginDesc' => '站在巨人的肩上 - 超强的自定义后台管理系统',
     //默认头像
     'default_avatar' => 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
@@ -104,6 +104,7 @@ return [
         'permission_menu_table' => 'admin_permission_menu',
         'role_permissions_table' => 'admin_role_permissions',
         'role_menu_table' => 'admin_role_menu',
+        'settings_table' => 'admin_setting',
     ],
     'check_route_permission' => true,
 ];

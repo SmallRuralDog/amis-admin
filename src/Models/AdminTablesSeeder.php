@@ -65,6 +65,13 @@ class AdminTablesSeeder extends Seeder
                 "order" => 6,
                 "parent_id" => 2,
             ],
+            [
+                'name' => '配置中心管理',
+                'slug' => 'settings',
+                'http_path' => ["/settings*"],
+                "order" => 7,
+                "parent_id" => 2,
+            ],
         ])->each(fn($item) => Permission::create($item));
 
         Role::first()->permissions()->save(Permission::first());
@@ -122,6 +129,15 @@ class AdminTablesSeeder extends Seeder
                 'icon' => '',
                 'uri' => 'menus',
                 'key' => 'menus',
+                'uri_type' => 'route',
+            ],
+            [
+                'parent_id' => 2,
+                'order' => 7,
+                'title' => '配置中心',
+                'icon' => '',
+                'uri' => 'settings',
+                'key' => 'settings',
                 'uri_type' => 'route',
             ]
         ]);

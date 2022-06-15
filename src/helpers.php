@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\HtmlString;
+use SmallRuralDog\AmisAdmin\Extensions\SettingStorage;
 
 function admin_path($path = ''): string
 {
@@ -35,7 +36,7 @@ function admin_route($path = ''): string
 {
 
     $prefix = trim(config('amis-admin.route.prefix'));
-    $path = str_replace($prefix.'/', '/', $path);
+    $path = str_replace($prefix . '/', '/', $path);
 
     return Str::of($path)->finish('/')->start('/')->rtrim("/")->value();
 }
@@ -64,6 +65,21 @@ function arr2tree($list, $id = 'id', $pid = 'parent_id', $son = 'children'): arr
     }
     unset($map);
     return $tree;
+}
+
+if (!function_exists('settings')) {
+
+    function settings($key = null, $default = null)
+    {
+        $setting = app()->make(SettingStorage::class);
+        if (is_null($key)) {
+            return $setting;
+        }
+        if (is_array($key)) {
+            return $setting->set($key);
+        }
+        return $setting->get($key, value($default));
+    }
 }
 
 function vite_assets(): HtmlString

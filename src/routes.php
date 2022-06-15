@@ -22,7 +22,6 @@ Route::group([
     $router->any('_handle_action_', [HandleController::class, 'action'])->name('amis-admin.handle-action');
     $router->post('_handle_upload_image_', [HandleController::class, 'uploadImage'])->name('amis-admin.handle-upload-image');
 
-
     $authController = config('amis-admin.auth.controller', AuthController::class);
 
     $router->resource('login', $authController)->names('amis-admin.login')->only(['index', 'store']);

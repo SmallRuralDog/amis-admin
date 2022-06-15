@@ -1,0 +1,67 @@
+<?php
+
+namespace DummyNamespace;
+
+use AmisAdmin;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use SmallRuralDog\AmisAdmin\Renderers\Button;
+use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
+use SmallRuralDog\AmisAdmin\Renderers\Form\InputKV;
+use SmallRuralDog\AmisAdmin\Renderers\Form\InputText;
+use SmallRuralDog\AmisAdmin\Renderers\Page;
+use SmallRuralDog\AmisAdmin\Renderers\Tab;
+use SmallRuralDog\AmisAdmin\Renderers\Tabs;
+
+class SettingsController extends Controller
+{
+    public function index(): JsonResponse
+    {
+        $page = Page::make()->title("配置中心")->toolbar([
+            Button::make()->label("保存")->level("primary")->type("submit")->target("setting-form"),
+        ]);
+        $form = AmisForm::make()
+            ->data(settings()->all())
+            ->name("setting-form")->wrapWithPanel(false)
+            ->api(route('admin.setting.save'));
+        $form->body([
+            Tabs::make()
+                ->tabsMode("chrome")
+                ->tabs([
+                    Tab::make()
+                        ->title("基本设置")
+                        ->body([
+                            InputText::make()->label("网站名称")->name("site_name"),
+                            InputText::make()->label("网站URL")->name("site_url"),
+                            InputKV::make()->label("附加配置")->name("addition_config"),
+                        ]),
+                ]),
+        ]);
+        $page->body($form);
+        return AmisAdmin::response($page);
+    }
+
+    public function save(Request $request): JsonResponse
+    {
+        try {
+            AmisAdmin::validatorData($request->all(), [
+                'site_name' => ['required'],
+                'site_url' => ['required'],
+                'more_config' => ['array'],
+            ]);
+            $count = 0;
+            foreach ($request->all() as $key => $value) {
+                if (settings($key) === $value) continue;
+                settings()->set($key, $value);
+                $count++;
+            }
+            return AmisAdmin::responseMessage("本次更新了 $count 个设置项");
+        } catch (\Exception $e) {
+            return AmisAdmin::responseError($e->getMessage());
+        }
+
+    }
+
+
+}

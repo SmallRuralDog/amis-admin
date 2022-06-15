@@ -44,6 +44,7 @@ class InstallCommand extends Command
         $this->makeDir('Controllers');
         $this->createHomeController();
         $this->createAuthController();
+        $this->createSettingsController();
 
         $this->createBootstrapFile();
         $this->createRoutesFile();
@@ -69,6 +70,17 @@ class InstallCommand extends Command
             str_replace('DummyNamespace', config('amis-admin.route.namespace'), $contents)
         );
         $this->line('<info>AuthController file was created:</info> ' . str_replace(base_path(), '', $authController));
+    }
+
+    public function createSettingsController(): void
+    {
+        $authController = $this->directory . '/Controllers/SettingsController.php';
+        $contents = $this->getStub('SettingsController');
+        $this->laravel['files']->put(
+            $authController,
+            str_replace('DummyNamespace', config('amis-admin.route.namespace'), $contents)
+        );
+        $this->line('<info>SettingsController file was created:</info> ' . str_replace(base_path(), '', $authController));
     }
 
     protected function createBootstrapFile(): void
