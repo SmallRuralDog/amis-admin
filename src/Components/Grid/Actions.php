@@ -27,6 +27,7 @@ class Actions
     protected float|string $width = 150;
 
     protected ?Closure $callDeleteActionFun = null;
+    protected ?Closure $callEditActionFun = null;
 
     public function __construct(Grid $grid)
     {
@@ -34,9 +35,8 @@ class Actions
     }
 
 
-    private function buildDeleteAction()
+    private function buildDeleteAction(): Button
     {
-
         $keyName = $this->grid->getPrimaryKey();
         $api = $this->grid->getDestroyUrl('${' . $keyName . '}');
         return AjaxAction::make()->label("删除")
@@ -44,7 +44,7 @@ class Actions
     }
 
     /**
-     * 处理删除操作
+     * 自定义删除操作
      * @param Closure $closure
      * @return void
      */
@@ -62,6 +62,16 @@ class Actions
         }
         $api = admin_route($this->grid->getEditUrl($keyName));
         return LinkAction::make()->label("编辑")->level("link")->link($api)->icon('fa fa-edit icon-mr');
+    }
+
+    /**
+     * 自定义编辑操作
+     * @param Closure $closure
+     * @return void
+     */
+    public function callEditAction(Closure $closure): void
+    {
+        $this->callEditActionFun = $closure;
     }
 
     /**
@@ -147,14 +157,18 @@ class Actions
         $actions = collect([]);
 
         if (!$this->disableEditAction) {
-            $actions->add($this->buildEditAction());
+            $editAction = $this->buildEditAction();
+            if ($this->callEditActionFun) {
+                call_user_func($this->callEditActionFun, $editAction);
+            }
+            $actions->add($editAction);
         }
         if (!$this->disableDeleteAction) {
-            $disableDeleteAction = $this->buildDeleteAction();
+            $deleteAction = $this->buildDeleteAction();
             if ($this->callDeleteActionFun) {
-                call_user_func($this->callDeleteActionFun, $disableDeleteAction);
+                call_user_func($this->callDeleteActionFun, $deleteAction);
             }
-            $actions->add($disableDeleteAction);
+            $actions->add($deleteAction);
         }
 
         return $actions->toArray();

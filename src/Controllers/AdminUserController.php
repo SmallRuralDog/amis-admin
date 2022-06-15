@@ -38,12 +38,10 @@ class AdminUserController extends AdminController
                 ->useTableColumn(Date::make()->datetime());
             $grid->actions(function (Grid\Actions $actions) {
                 $actions->rowAction();
-
                 $actions->callDeleteAction(function (AjaxAction $action) {
                     $id = AmisAdmin::user()?->getKey();
                     $action->hiddenOn("id==$id"); //这里使用了显隐判断
                 });
-
             });
         });
     }
