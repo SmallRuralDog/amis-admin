@@ -37,5 +37,10 @@ namespace SmallRuralDog\AmisAdmin\Renderers\Form;
  */
 class InputFile extends FormBase
 {
-public string $type = 'input-file';
+    public string $type = 'input-file';
+
+    public function __construct()
+    {
+        $this->receiver(route('amis-admin.handle-upload-file'));
+    }
 }

@@ -62,6 +62,19 @@ class HandleController extends Controller
         }
     }
 
+    public function uploadFile(Request $request): JsonResponse
+    {
+        try {
+            AmisAdmin::validatorData($request->all(), [
+                'file' => 'mimes:' . config('amis-admin.upload.file_mimes', '')
+            ]);
+            return $this->upload($request);
+
+        } catch (Exception $exception) {
+            return AmisAdmin::responseError($exception->getMessage());
+        }
+    }
+
 
     protected function upload(Request $request)
     {

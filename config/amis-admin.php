@@ -75,6 +75,7 @@ return [
             'logout',
             '_handle_action_',
             '_handle_upload_image_',
+            '_handle_upload_file_',
             'view/*',
         ],
     ],
@@ -86,6 +87,7 @@ return [
             'file' => 'files',
         ],
         'mimes' => 'jpeg,bmp,png,gif,jpg',
+        'file_mimes' => 'doc,docx,xls,xlsx,ppt,pptx,pdf,zip,rar,7z',
     ],
     'database' => [
         'connection' => '',

@@ -21,6 +21,7 @@ Route::group([
     $router->get('getHeaderToolbar', [HandleController::class, 'headerToolbar'])->name('amis-admin.headerToolbar');
     $router->any('_handle_action_', [HandleController::class, 'action'])->name('amis-admin.handle-action');
     $router->post('_handle_upload_image_', [HandleController::class, 'uploadImage'])->name('amis-admin.handle-upload-image');
+    $router->post('_handle_upload_file_', [HandleController::class, 'uploadFile'])->name('amis-admin.handle-upload-file');
 
     $authController = config('amis-admin.auth.controller', AuthController::class);
 
