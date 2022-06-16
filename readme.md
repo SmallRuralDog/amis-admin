@@ -6,18 +6,10 @@
 
 ## 什么是 amis
 [Amis](https://github.com/baidu/amis) 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。
-## 与 `Laravel Admin` `Dcat Admin`的异同
-我一直在用这两个，很强大，大大提高了项目开发的效率，但是在一些复杂的自定义功能时，官方所提供的相关组件不是很好实现
-
-当发现`amis`的时候，我就觉得这必须得整一套出来，所以说 `Amis Admin`是站在了这些前辈们的肩上
-
-由于`Amis Admin` 是前后端分离的，在一些使用方法上需要按照 `Amis` 的规则来，但是强大的功能，与友好的代码，使用过后就会发现
 
 熟悉`Laravel Admin`或者`Dcat Admin`的很快就能上手使用 `Amis Admin`
 
-建议先体验一下`Amis`的功能。如果觉得符合你的胃口，那么`Amis Admin`是你不二的选择
-
-[Amis在线体验](https://aisuda.bce.baidu.com/amis/zh-CN/components/page)
+建议先体验一下`Amis`的功能。[Amis在线体验](https://aisuda.bce.baidu.com/amis/zh-CN/components/page)
 
 # 环境
 
@@ -52,7 +44,7 @@ php artisan amis-admin:install
 php artisan vendor:publish --tag=amis-admin.assets --force
 ```
 
-## 站在巨人的肩上
+## 感谢
 
 - Laravel
 - Amis
