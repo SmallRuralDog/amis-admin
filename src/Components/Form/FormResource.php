@@ -158,6 +158,9 @@ trait FormResource
      */
     protected function prepareUpdate(array $updates, bool $oneToOneRelation = false): array
     {
+        if ($this->model()->getConnection()->getDriverName() === "mongodb") {
+            return $updates;
+        }
         $prepared = [];
         $columns = Schema::getColumnListing($this->model()->getTable());
         foreach ($updates as $key => $value) {
@@ -483,6 +486,7 @@ trait FormResource
         //预处理数据
         $this->prepare($data);
 
+
         DB::transaction(function () {
             $updates = $this->prepareUpdate($this->updates);
             foreach ($updates as $key => $value) {
@@ -505,17 +509,19 @@ trait FormResource
         try {
             $this->callDeleting($ids);
             $relations = $this->getRelations();
-            $this->builder->with($relations)->whereIn($this->getPrimaryKey(), explode(',', $ids))->chunkById(10, function ($items) use ($relations) {
-                foreach ($items as $item) {
-                    $this->model = $item;
 
-                    //删除文件 TODO
+            $ids = explode(',', $ids);
 
-                    //删除关联模型数据
-                    $this->deleteRelation($relations);
-                    $item->delete();
-                }
-            });
+
+            foreach ($this->builder->with($relations)->whereIn($this->getPrimaryKey(), $ids)->lazy() as $item) {
+                $this->model = $item;
+                //删除文件 TODO
+
+                //删除关联模型数据
+                $this->deleteRelation($relations);
+                $item->delete();
+            }
+
             $this->callDeleted();
             return AmisAdmin::responseMessage('删除成功');
         } catch (Exception $exception) {
