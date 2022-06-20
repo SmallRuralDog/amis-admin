@@ -14,4 +14,12 @@ class Setting extends Model
     ];
 
     protected $primaryKey = "slug";
+
+    public function __construct(array $attributes = [])
+    {
+        $connection = config('amis-admin.database.connection') ?: config('database.default');
+        $this->setConnection($connection);
+        $this->setTable(config('amis-admin.database.settings_table'));
+        parent::__construct($attributes);
+    }
 }

@@ -106,7 +106,7 @@ return [
         'permission_menu_table' => 'admin_permission_menu',
         'role_permissions_table' => 'admin_role_permissions',
         'role_menu_table' => 'admin_role_menu',
-        'settings_table' => 'admin_setting',
+        'settings_table' => 'admin_settings',
     ],
     'check_route_permission' => true,
 ];
