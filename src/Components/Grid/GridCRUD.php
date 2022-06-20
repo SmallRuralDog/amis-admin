@@ -137,6 +137,8 @@ trait GridCRUD
         //添加列配置
         $this->crud->columns($columns);
 
+        $this->crud->primaryField($this->getPrimaryKey());
+
         return $this->crud;
 
     }
