@@ -139,8 +139,10 @@ trait FormResource
      */
     protected function prepareInsert($inserts): array
     {
+        if ($this->model()->getConnection()->getDriverName() === "mongodb") {
+            return $inserts;
+        }
         $prepared = [];
-
         $columns = Schema::getColumnListing($this->model()->getTable());
         foreach ($inserts as $key => $value) {
             if (in_array($key, $columns)) {
