@@ -40,7 +40,7 @@ class Grid implements JsonSerializable
         $this->_action = (string)request('_action');
     }
 
-    public static function make(Builder $model, string $routeName, $fun): Grid
+    public static function make($model, string $routeName, $fun): Grid
     {
         $grid = new static();
         $grid->model = new Model($model, $grid);

@@ -11,7 +11,7 @@ use Str;
 
 class Model
 {
-    protected Builder $builder;
+    protected $builder;
     protected EloquentModel $model;
 
     protected Grid $grid;
@@ -184,7 +184,7 @@ class Model
     /**
      * @return Builder
      */
-    public function getBuilder(): Builder
+    public function getBuilder()
     {
         return $this->builder;
     }
@@ -193,7 +193,7 @@ class Model
     /**
      * @return EloquentModel
      */
-    public function getModel(): EloquentModel
+    public function getModel()
     {
         return $this->model;
     }

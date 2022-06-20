@@ -3,7 +3,6 @@
 namespace SmallRuralDog\AmisAdmin\Components;
 
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use JsonSerializable;
 use SmallRuralDog\AmisAdmin\Components\Form\Actions;
@@ -12,7 +11,6 @@ use SmallRuralDog\AmisAdmin\Components\Form\FormHooks;
 use SmallRuralDog\AmisAdmin\Components\Form\FormMain;
 use SmallRuralDog\AmisAdmin\Components\Form\FormResource;
 use SmallRuralDog\AmisAdmin\Components\Form\FormToolbar;
-
 use SmallRuralDog\AmisAdmin\Components\Form\Toolbar;
 use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
 use SmallRuralDog\AmisAdmin\Renderers\Page;
@@ -27,7 +25,7 @@ class Form implements JsonSerializable
     private Page $page;
     private string $routeName;
 
-    private Builder $builder;
+    private $builder;
     private Model $model;
 
     protected bool $isDialog = false;
@@ -54,7 +52,7 @@ class Form implements JsonSerializable
         return $form;
     }
 
-    public function model(): Model|Builder
+    public function model()
     {
         return $this->builder->getModel();
     }
