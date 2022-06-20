@@ -84,7 +84,7 @@ return new class extends Migration {
             $table->timestamps();
         });
         Schema::create(config('amis-admin.database.settings_table'), function (Blueprint $table) {
-            $table->text('slug')->primary();
+            $table->string('slug')->primary();
             $table->json('value');
             $table->timestamps();
         });
