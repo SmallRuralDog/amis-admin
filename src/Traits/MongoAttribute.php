@@ -1,6 +1,6 @@
 <?php
 
-namespace SmallRuralDog\AmisAdmin\Extensions;
+namespace SmallRuralDog\AmisAdmin\Traits;
 
 trait MongoAttribute
 {
