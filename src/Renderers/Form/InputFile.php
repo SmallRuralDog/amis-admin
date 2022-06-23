@@ -43,4 +43,14 @@ class InputFile extends FormBase
     {
         $this->receiver(route('amis-admin.handle-upload-file'));
     }
+
+    /**
+     * 使用唯一名称
+     * @return $this
+     */
+    public function uniqueName(): self
+    {
+        $this->receiver(route('amis-admin.handle-upload-image', ['unique_name' => true]));
+        return $this;
+    }
 }
