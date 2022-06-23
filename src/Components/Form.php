@@ -75,6 +75,10 @@ class Form implements JsonSerializable
         return $this->isDialog;
     }
 
+    public function isMongoDB(): bool
+    {
+        return $this->model()->getConnection()->getDriverName() === "mongodb";
+    }
 
     public function jsonSerialize()
     {

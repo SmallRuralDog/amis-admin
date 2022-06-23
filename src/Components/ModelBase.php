@@ -3,7 +3,6 @@
 namespace SmallRuralDog\AmisAdmin\Components;
 
 use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 trait ModelBase
 {
@@ -29,7 +28,7 @@ trait ModelBase
     /**
      * 设置模型主键
      * @param string $primaryKey
-     * @return $this
+     * @return self
      */
     public function setPrimaryKey(string $primaryKey): self
     {
@@ -40,6 +39,9 @@ trait ModelBase
 
     public function getPrimaryKey(): string
     {
+        if ($this->primaryKey === 'id' && $this->isMongoDB()) {
+            return "_id";
+        }
         return $this->primaryKey;
     }
 

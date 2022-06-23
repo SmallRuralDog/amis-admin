@@ -63,6 +63,11 @@ class Grid implements JsonSerializable
         return $this->model->getBuilder();
     }
 
+    public function isMongoDB(): bool
+    {
+        return $this->builder()->getModel()->getConnection()->getDriverName() === "mongodb";
+    }
+
     public function jsonSerialize()
     {
         //获取数据
