@@ -14,4 +14,9 @@ class Flex extends BaseSchema
 {
     public string $type = 'flex';
 
+    public function __construct()
+    {
+        $this->justify('start')->alignItems('start');
+    }
+
 }

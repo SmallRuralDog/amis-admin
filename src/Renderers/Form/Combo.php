@@ -40,4 +40,29 @@ class Combo extends FormBase
 {
     public string $type = 'combo';
 
+    public function getValue($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $v) {
+                $component = collect($this->items)->firstWhere('name', $key);
+                if (is_object($component) && method_exists($component::class, 'getValue')) {
+                    data_set($value, $key, $component->getValue($v));
+                }
+            }
+        }
+        return $value;
+    }
+
+    public function setValue($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $v) {
+                $component = collect($this->items)->firstWhere('name', $key);
+                if (is_object($component) && method_exists($component::class, 'setValue')) {
+                    data_set($value, $key, $component->setValue($v));
+                }
+            }
+        }
+        return $value;
+    }
 }
