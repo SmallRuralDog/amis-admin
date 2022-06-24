@@ -82,7 +82,7 @@ class HandleController extends Controller
             $file = $request->file('file');
             $type = $request->file('type');
             $path = $request->input('path', 'images');
-            $uniqueName = $request->boolean('uniqueName', config('amis-admin.upload.uniqueName', false));
+            $uniqueName = $request->boolean('unique_name', config('amis-admin.upload.uniqueName', false));
             $disk = config('amis-admin.upload.disk');
             $name = $file->getClientOriginalName();
             if ($uniqueName) {

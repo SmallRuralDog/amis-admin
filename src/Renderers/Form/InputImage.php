@@ -52,4 +52,24 @@ class InputImage extends FormBase
         $this->receiver(route('amis-admin.handle-upload-image', ['unique_name' => true]));
         return $this;
     }
+
+    public function getValue($value)
+    {
+        if (is_array($value)) {
+            return array_map(function ($v) {
+                return admin_file_url($v);
+            }, $value);
+        }
+        return admin_file_url($value);
+    }
+
+    public function setValue($value)
+    {
+        if (is_array($value)) {
+            return array_map(function ($v) {
+                return admin_file_restore_path($v);
+            }, $value);
+        }
+        return admin_file_restore_path($value);
+    }
 }

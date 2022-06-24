@@ -3,6 +3,7 @@
 namespace SmallRuralDog\AmisAdmin\Renderers;
 
 use Closure;
+use JsonSerializable;
 
 /**
  * @method $this type($v)
@@ -16,8 +17,12 @@ use Closure;
  * @method $this visible($v)
  * @method $this visibleOn($v)
  * @method $this id($v)
+ *
+ * @method getValue($value) 给组件赋值时自定义处理
+ * @method setValue($value) 组件赋值提交时自定义处理
+ * @method defaultAttr() 可以自定义属性的设置
  */
-class BaseSchema
+class BaseSchema implements JsonSerializable
 {
     public string $type;
 
@@ -32,6 +37,11 @@ class BaseSchema
         return $this;
     }
 
+    public function __get($name)
+    {
+        return data_get($this, $name);
+    }
+
     public function __call($name, $arguments)
     {
         abort_if(count($arguments) !== 1, 400, "{$name} method parameter error");
@@ -41,6 +51,15 @@ class BaseSchema
         }
         $this->$name = $argument;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        if (method_exists($this::class, 'defaultAttr')) {
+            $this->defaultAttr();
+        }
+
+        return get_object_vars($this);
     }
 
 }

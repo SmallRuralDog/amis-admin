@@ -21,4 +21,18 @@ namespace SmallRuralDog\AmisAdmin\Renderers;
 class Avatar extends BaseSchema
 {
     public string $type = 'avatar';
+
+    public function defaultAttr()
+    {
+        if (!$this->src) {
+            $name = $this->name;
+            $this->src('${' . $name . '}');
+        }
+
+    }
+
+    public function getValue($value)
+    {
+        return admin_file_url($value);
+    }
 }

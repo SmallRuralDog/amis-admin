@@ -3,6 +3,7 @@
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
 use Closure;
+use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 use SmallRuralDog\AmisAdmin\Renderers\Table\TableColumn;
 
 /**
@@ -25,14 +26,19 @@ use SmallRuralDog\AmisAdmin\Renderers\Table\TableColumn;
  * @method $this remark($v) 提示信息
  * @method $this value($v) 默认值, 只有在 inputTable 里面才有用
  * @method $this unique($v) 是否唯一, 只有在 inputTable 里面才有用
+ *
+ * @method getValue($v) 给组件赋值时自定义处理
+ * @method setValue($v) 组件赋值提交时自定义处理
+ * @method defaultAttr() 可以自定义属性的设置
  */
 class Column
 {
+    use ColumnEdit;
 
     protected string $label;
     protected string $name;
 
-    protected TableColumn $tableColumn;
+    protected BaseSchema $tableColumn;
 
     public function __construct($name, $label)
     {
@@ -54,23 +60,27 @@ class Column
 
 
     /**
+     * 自定义组件
      * @param $typeComponent
      * @return TableColumn
      */
-    public function useTableColumn($typeComponent = null): TableColumn
+    public function useTableColumn($typeComponent = null)
     {
         if ($typeComponent) {
             if ($typeComponent instanceof Closure) {
                 $typeComponent = $typeComponent();
             }
-            foreach ($typeComponent as $key => $value) {
-                $this->tableColumn->$key($value);
-            }
+
+            $this->tableColumn = $typeComponent;
+
+            $this->tableColumn->name($this->name)->label($this->label);
         }
         return $this->tableColumn;
     }
 
+
     /**
+     * 获取name
      * @return string
      */
     public function getName(): string
@@ -78,7 +88,11 @@ class Column
         return $this->name;
     }
 
-    public function render(): TableColumn
+    /**
+     *
+     * @return BaseSchema|TableColumn
+     */
+    public function render()
     {
         return $this->tableColumn;
     }

@@ -130,6 +130,16 @@ trait FormResource
         $this->relations = $this->getRelationInputs($this->inputs);
         $this->updates = Arr::except($this->inputs, array_keys($this->relations));
 
+        $items = $this->getItems();
+        /**@var Item $item */
+        foreach ($items as $item) {
+            if (!collect($this->updates)->has($item->getName())) continue;
+            $component = $item->render();
+            if (method_exists($component::class, 'setValue')) {
+                $value = data_get($this->updates, $item->getName());
+                data_set($this->updates, $item->getName(), $component->setValue($value));
+            }
+        }
     }
 
     /**
@@ -139,11 +149,12 @@ trait FormResource
      */
     protected function prepareInsert($inserts): array
     {
-        if ($this->model()->getConnection()->getDriverName() === "mongodb") {
-            return $inserts;
-        }
         $prepared = [];
-        $columns = Schema::getColumnListing($this->model()->getTable());
+        $formColumns = collect($this->getItems())->map(fn($item) => $item->getName())->toArray();
+        $dbColumns = Schema::getColumnListing($this->model()->getTable());
+        $columns = array_merge($formColumns, $dbColumns);
+        //数组去除重复项
+        $columns = array_unique($columns);
         foreach ($inserts as $key => $value) {
             if (in_array($key, $columns)) {
                 Arr::set($prepared, $key, $value);
@@ -160,11 +171,13 @@ trait FormResource
      */
     protected function prepareUpdate(array $updates, bool $oneToOneRelation = false): array
     {
-        if ($this->model()->getConnection()->getDriverName() === "mongodb") {
-            return $updates;
-        }
         $prepared = [];
-        $columns = Schema::getColumnListing($this->model()->getTable());
+
+        $formColumns = collect($this->getItems())->map(fn($item) => $item->getName())->toArray();
+        $dbColumns = Schema::getColumnListing($this->model()->getTable());
+        $columns = array_merge($formColumns, $dbColumns);
+        //数组去除重复项
+        $columns = array_unique($columns);
         foreach ($updates as $key => $value) {
             if (in_array($key, $columns)) {
                 Arr::set($prepared, $key, $value);
@@ -385,7 +398,29 @@ trait FormResource
             }
         });
         $this->editData = $this->builder->findOrFail($this->editKey);
+
+        $this->prepareEditData($this->editData);
+
         $this->callEdiData($this->editData);
+    }
+
+    /**
+     * 编辑数据预处理
+     * @param $editData
+     * @return void
+     */
+    private function prepareEditData($editData)
+    {
+        $items = $this->getItems();
+        /**@var Item $item */
+        foreach ($items as $item) {
+            $component = $item->render();
+            if (method_exists($component::class, 'getValue')) {
+                $value = data_get($editData, $item->getName());
+                data_set($editData, $item->getName(), $component->getValue($value));
+            }
+        }
+        $this->editData = $editData;
     }
 
     /**
@@ -458,7 +493,7 @@ trait FormResource
             $this->isQuickEdit = true;
             $data = (array)request('rowsDiff');
             $ids = collect($data)->pluck($this->getPrimaryKey())->toArray();
-            foreach ($this->builder->whereIn($this->getPrimaryKey(), $ids)->get() as $item) {
+            foreach ($this->builder->whereIn($this->getPrimaryKey(), $ids)->cursor() as $item) {
                 $this->inputs = [];
                 $updateData = collect($data)->filter(function ($value) use ($item) {
                     return data_get($value, $this->getPrimaryKey()) == $item->getKey();
@@ -488,9 +523,9 @@ trait FormResource
         //预处理数据
         $this->prepare($data);
 
-
         DB::transaction(function () {
             $updates = $this->prepareUpdate($this->updates);
+            
             foreach ($updates as $key => $value) {
                 $this->model->setAttribute($key, $value);
             }

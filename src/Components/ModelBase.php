@@ -6,7 +6,7 @@ use Illuminate\Contracts\Database\Query\Builder;
 
 trait ModelBase
 {
-    protected string $primaryKey = 'id';
+    protected ?string $primaryKey = null;
 
     /**
      * @return string
@@ -39,10 +39,10 @@ trait ModelBase
 
     public function getPrimaryKey(): string
     {
-        if ($this->primaryKey === 'id' && $this->isMongoDB()) {
-            return "_id";
+        if ($this->primaryKey) {
+            return $this->primaryKey;
         }
-        return $this->primaryKey;
+        return $this->builder()->getModel()->getKeyName();
     }
 
 

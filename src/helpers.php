@@ -49,8 +49,42 @@ if (!function_exists('admin_asset')) {
     }
 }
 
-function arr2tree($list, $id = 'id', $pid = 'parent_id', $son = 'children'): array
+
+if (!function_exists('admin_file_url')) {
+    function admin_file_url($path)
+    {
+        if (!$path) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, ["http://", "https://"])) {
+            return $path;
+        }
+        return Storage::disk(config('admin.upload.disk'))->url($path);
+    }
+}
+
+if (!function_exists('admin_file_restore_path')) {
+    function admin_file_restore_path($url)
+    {
+        if (!$url) {
+            return $url;
+        }
+        if (Str::startsWith($url, ["http://", "https://"])) {
+            $base_url = Storage::disk(config('admin.upload.disk'))->url('');
+            $url = str_replace($base_url, '', $url);
+        }
+        return $url;
+    }
+}
+
+function arr2tree($list, $id = 'id', $pid = 'parent_id', $son = 'children')
 {
+
+    if (!is_array($list)) {
+        $list = collect($list)->toArray();
+    }
+
     [$tree, $map] = [[], []];
     foreach ($list as $item) {
         $map[$item[$id]] = $item;

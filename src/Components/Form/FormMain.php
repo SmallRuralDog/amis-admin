@@ -5,7 +5,6 @@ namespace SmallRuralDog\AmisAdmin\Components\Form;
 use Closure;
 use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
-use SmallRuralDog\AmisAdmin\Renderers\Form\Hidden;
 
 trait FormMain
 {
@@ -31,6 +30,14 @@ trait FormMain
         $item = new Item($name, $label);
         $this->items[] = $item;
         return $item;
+    }
+
+    /**
+     * @return array
+     */
+    public function getItems(): array
+    {
+        return $this->items;
     }
 
     /**

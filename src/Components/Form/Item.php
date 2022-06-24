@@ -75,9 +75,9 @@ class Item
             if ($typeComponent instanceof Closure) {
                 $typeComponent = $typeComponent();
             }
-            foreach ($typeComponent as $key => $value) {
-                $this->formItem->$key($value);
-            }
+            $this->formItem = $typeComponent;
+
+            $this->formItem->name($this->name)->label($this->label);
         }
         return $this->formItem;
     }

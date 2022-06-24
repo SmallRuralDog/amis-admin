@@ -27,4 +27,9 @@ namespace SmallRuralDog\AmisAdmin\Renderers;
 class Image extends BaseSchema
 {
     public string $type = 'image';
+
+    public function getValue($value)
+    {
+        return admin_file_url($value);
+    }
 }

@@ -121,12 +121,30 @@ class Model
 
     public function buildData(): array
     {
-        $data = $this->get();
-
-
-        return $data;
+        return $this->get();
     }
 
+    /**
+     * 数据预处理
+     * @param $data
+     * @return void
+     */
+    protected function prepareData(&$data)
+    {
+        $columns = $this->grid->getColumns();
+
+        /**@var Column $column */
+        foreach ($columns as $column) {
+            $component = $column->render();
+            if (method_exists($component::class, 'getValue')) {
+                foreach ($data as &$item) {
+                    $value = data_get($item, $column->getName());
+                    data_set($item, $column->getName(), $component->getValue($value));
+                }
+            }
+        }
+
+    }
 
     /**
      * @return array
@@ -141,20 +159,19 @@ class Model
 
         if ($this->grid->isLoadDataOnce()) {
             $pageData = $this->builder->get();
+            $this->prepareData($pageData);
             $this->callData($pageData);
-            return $this->toData($pageData->toArray());
-        } else {
-
-            $prePage = (int)request('perPage', 15);
-
-            $pageData = $this->builder->paginate($prePage);
-            $items = $pageData->items();
-            $this->callData($items);
-            return [
-                'items' => $items,
-                'total' => $pageData->total(),
-            ];
+            return $this->toData($pageData);
         }
+        $prePage = (int)request('perPage', 15);
+        $pageData = $this->builder->paginate($prePage);
+        $items = $pageData->items();
+        $this->prepareData($items);
+        $this->callData($items);
+        return [
+            'items' => $items,
+            'total' => $pageData->total(),
+        ];
     }
 
     private function callData($data)
@@ -171,7 +188,7 @@ class Model
         }
     }
 
-    private function toData(array $data): array
+    private function toData($data)
     {
 
         if ($this->grid->isToTree()) {
