@@ -1,7 +1,7 @@
 <template>
-    <div class="amis-page" v-loading="loading">
+    <div class="amis-page" v-loading="thisPage.loading">
         <transition name="slide-up" mode="out-in">
-            <AMisRenderer :key="route.path" :amis-json="pageJson" v-if="pageJson"/>
+            <AMisRenderer :key="route.path" :amis-json="thisPage.pageJson" v-if="thisPage.pageJson"/>
         </transition>
     </div>
 </template>
@@ -12,27 +12,22 @@ import {onMounted, ref, watch} from "vue";
 import {useGetPageJson} from "@/utils/api";
 
 import AMisRenderer from "@/components/amis/AMisRenderer.vue";
+import {storeToRefs} from "pinia";
+import {usePagesStore} from "@/stores/pages";
 
-const pageJson = ref()
-
+const {thisPage} = storeToRefs(usePagesStore())
+const {getPageJson} = usePagesStore()
 const route = useRoute()
 
-const loading = ref(true)
+
 
 watch(() => route.path, async (path: string) => {
     await getPageJson(path)
 })
 
-onMounted(() => {
-    getPageJson(route.path)
+onMounted(async () => {
+    await getPageJson(route.path)
 })
-
-const getPageJson = async (path: string) => {
-    loading.value = true
-    const res = await useGetPageJson(path)
-    pageJson.value = res.data
-    loading.value = false
-}
 </script>
 <style lang="scss">
 

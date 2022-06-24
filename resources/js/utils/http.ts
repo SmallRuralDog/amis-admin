@@ -60,7 +60,6 @@ const http: Http = {
                 });
         });
     },
-
     post(url, params) {
         return new Promise((resolve, reject) => {
             axios

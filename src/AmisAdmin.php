@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Response;
 use SmallRuralDog\AmisAdmin\Models\AdminUser;
 use SmallRuralDog\AmisAdmin\Models\Menu;
+use Str;
 use Validator;
 
 class AmisAdmin
@@ -42,6 +43,7 @@ class AmisAdmin
         $js = array_filter(array_unique($js));
         return view('amis-admin::partials.js', compact('js'));
     }
+
     public static function baseJs($baseJs = null): View|Factory|array|Application
     {
         if (!is_null($baseJs)) {
@@ -88,6 +90,14 @@ class AmisAdmin
             //角色绑定的菜单
             $list = $userRolesData->pluck('menus')->flatten()->merge($permissionMenus)->unique('id')->filter(fn($item) => !$item->hidden)->sortBy('order');
         }
+
+        $list = $list->map(function (Menu $menu) {
+            if ($menu->uri_type == 'route') {
+                $menu->uri = Str::start($menu->uri, '/');
+            }
+            return $menu;
+        });
+
         return arr2tree($list->toArray());
     }
 

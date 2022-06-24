@@ -22,7 +22,7 @@ class Filter extends AmisForm
     {
         $this->title("搜索");
         $this->submitText("");
-        $this->mode("inline");
+        $this->mode("inline")->wrapWithPanel(false)->className('mb-3 bg-search px-2 pt-3');
     }
 
     protected function addItem($name = '', $label = ''): Item
