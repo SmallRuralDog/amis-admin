@@ -22,4 +22,16 @@ namespace SmallRuralDog\AmisAdmin\Renderers;
 class Images extends BaseSchema
 {
     public string $type = 'images';
+
+    public function getValue($value)
+    {
+        if (is_array($value)) {
+            $value = array_map(function ($v) {
+                return admin_file_url($v);
+            }, $value);
+
+            return collect($value)->values()->toArray();
+        }
+        return admin_file_url($value);
+    }
 }

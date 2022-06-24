@@ -30,6 +30,11 @@ class Image extends BaseSchema
 
     public function getValue($value)
     {
+        if (is_array($value)) {
+            return array_map(function ($v) {
+                return admin_file_url($v);
+            }, $value);
+        }
         return admin_file_url($value);
     }
 }
