@@ -54,4 +54,11 @@ use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 class AmisForm extends BaseSchema
 {
     public string $type = 'form';
+
+    public function __construct()
+    {
+        $this->mode('normal');
+    }
+
+
 }

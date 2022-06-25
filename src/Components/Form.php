@@ -75,6 +75,12 @@ class Form implements JsonSerializable
         return $this->isDialog;
     }
 
+    public function dialog(): Form
+    {
+        $this->isDialog = true;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
 

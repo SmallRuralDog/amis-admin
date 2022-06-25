@@ -20,5 +20,4 @@ namespace SmallRuralDog\AmisAdmin\Renderers\Form;
 class Select extends FormOptions
 {
     public string $type = 'select';
-
 }

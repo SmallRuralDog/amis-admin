@@ -2,15 +2,16 @@
 
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
+use SmallRuralDog\AmisAdmin\Components\Form;
 use SmallRuralDog\AmisAdmin\Components\Grid;
 use SmallRuralDog\AmisAdmin\Renderers\Action\DialogAction;
 use SmallRuralDog\AmisAdmin\Renderers\Service;
-use SmallRuralDog\AmisAdmin\Renderers\Wrapper;
 
 class DialogForm
 {
 
     protected Grid $grid;
+    protected ?Form $form = null;
 
     protected DialogAction $createDialogAction;
     protected DialogAction $editDialogAction;
@@ -72,6 +73,18 @@ class DialogForm
     }
 
     /**
+     * 设置表单，添加操作时，不需要异步加载表单渲染配置
+     * @param Form $form
+     * @return DialogForm
+     */
+    public function form(Form $form): DialogForm
+    {
+        $this->form = $form;
+        $this->form->dialog();
+        return $this;
+    }
+
+    /**
      * 渲染弹窗
      * @param $api
      * @param bool $edit
@@ -91,7 +104,7 @@ class DialogForm
         $this->createDialogAction->dialog([
             'title' => '新增',
             'size' => $this->size,
-            'body' => Service::make()->schemaApi($api),
+            'body' => $this->form ?: Service::make()->schemaApi($api),
         ]);
         return $this->createDialogAction;
     }

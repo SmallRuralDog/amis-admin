@@ -17,9 +17,9 @@ trait GridDialogForm
      * 弹窗表单模式
      * @param string|null $size xs、sm、md、lg、xl、full
      * @param Closure|null $closure
-     * @return void
+     * @return DialogForm
      */
-    public function dialogForm(string $size = null, Closure $closure = null): void
+    public function dialogForm(string $size = null, Closure $closure = null): DialogForm
     {
         $this->isDialogForm = true;
 
@@ -28,6 +28,8 @@ trait GridDialogForm
         $this->dialogForm->size($size);
 
         if ($closure) $closure($this->dialogForm);
+
+        return $this->dialogForm;
     }
 
     public function renderDialogForm($api, $edit = false): DialogAction

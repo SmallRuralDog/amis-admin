@@ -14,4 +14,11 @@ class InputDate extends FormBase
 {
 
     public string $type = 'input-date';
+
+    public function __construct()
+    {
+        $this->format("YYYY-MM-DD HH:mm:ss");
+    }
+
+
 }
