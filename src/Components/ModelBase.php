@@ -51,6 +51,11 @@ trait ModelBase
         return $this->builder;
     }
 
+    public function model()
+    {
+        return $this->builder()->getModel();
+    }
+
     public function getIndexUrl($parameters = []): string
     {
         return route($this->getRouteName() . '.index', $parameters, false);

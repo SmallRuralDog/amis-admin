@@ -90,10 +90,14 @@ class HandleController extends Controller
             } else {
                 $path = $file->storeAs($path, $name, $disk);
             }
+
+            $url = Storage::disk($disk)->url($path);
+
             $data = [
                 'value' => $path,
                 'filename' => $name,
-                'url' => Storage::disk($disk)->url($path)
+                'url' => $url,
+                'link' => $url,
             ];
             return AmisAdmin::response($data);
         } catch (Exception $exception) {

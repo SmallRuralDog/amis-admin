@@ -15,7 +15,7 @@ trait ColumnEdit
             'type' => 'switch',
             'mode' => 'inline',
             "saveImmediately" => true,
-        ]);
+        ])->width(50)->align('center');
         return $this;
     }
 
@@ -47,7 +47,7 @@ trait ColumnEdit
             'type' => 'input-number',
             'mode' => $inline ? 'inline' : 'popover',
             "saveImmediately" => $saveImmediately,
-        ]);
+        ])->width(100);
         return $this;
     }
 }
