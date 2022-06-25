@@ -2,10 +2,12 @@
 
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
+use SmallRuralDog\AmisAdmin\Components\Grid;
+
 trait GridTree
 {
     private bool $toTree = false;
-    private string $toTreeKey = "id";
+    private ?string $toTreeKey = null;
     private string $toTreeParentKey = "parent_id";
     private string $toTreeChildrenName = "parent_id";
 
@@ -23,7 +25,10 @@ trait GridTree
      */
     public function getToTreeKey(): string
     {
-        return $this->toTreeKey;
+        if ($this->toTreeKey) {
+            return $this->toTreeKey;
+        }
+        return $this->builder()->getModel()->getKeyName();
     }
 
 
@@ -45,13 +50,16 @@ trait GridTree
 
     /**
      * 嵌套数据模式
-     * @param string $toTreeKey
+     * @param string|null $toTreeKey
      * @param string $toTreeParentKey
      * @param string $toTreeChildrenName
-     * @return self
+     * @return Grid|GridTree
      */
-    public function toTree(string $toTreeKey = "id", string $toTreeParentKey = "parent_id", string $toTreeChildrenName = "children"): self
+    public function toTree(string $toTreeKey = null, string $toTreeParentKey = "parent_id", string $toTreeChildrenName = "children"): self
     {
+        if (!$toTreeKey) {
+            $toTreeKey = $this->builder()->getModel()->getKeyName();
+        }
         $this->toTree = true;
         $this->toTreeKey = $toTreeKey;
         $this->toTreeParentKey = $toTreeParentKey;

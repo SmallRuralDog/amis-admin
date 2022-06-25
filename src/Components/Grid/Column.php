@@ -33,7 +33,7 @@ use SmallRuralDog\AmisAdmin\Renderers\Table\TableColumn;
  */
 class Column
 {
-    use ColumnEdit;
+    use ColumnEdit, ColumnDisplay;
 
     protected string $label;
     protected string $name;
