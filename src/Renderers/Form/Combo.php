@@ -65,4 +65,16 @@ class Combo extends FormBase
         }
         return $value;
     }
+
+    public function onDelete($value): void
+    {
+        if (is_array($value)) {
+            foreach ($value as $key => $v) {
+                $component = collect($this->items)->firstWhere('name', $key);
+                if (is_object($component) && method_exists($component::class, 'onDelete')) {
+                    data_set($value, $key, $component->onDelete($v));
+                }
+            }
+        }
+    }
 }

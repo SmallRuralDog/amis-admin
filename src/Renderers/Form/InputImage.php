@@ -38,6 +38,8 @@ class InputImage extends FormBase
 {
     public string $type = 'input-image';
 
+    private bool $reserved = false;
+
     public function __construct()
     {
         $this->receiver(route('amis-admin.handle-upload-image'));
@@ -50,6 +52,17 @@ class InputImage extends FormBase
     public function uniqueName(): self
     {
         $this->receiver(route('amis-admin.handle-upload-image', ['unique_name' => true]));
+        return $this;
+    }
+
+    /**
+     * 数据删除时保留文件
+     * @param bool $reserved
+     * @return InputImage
+     */
+    public function reserved(bool $reserved = true): InputImage
+    {
+        $this->reserved = $reserved;
         return $this;
     }
 
@@ -71,5 +84,16 @@ class InputImage extends FormBase
             }, $value);
         }
         return admin_file_restore_path($value);
+    }
+
+    public function onDelete($value): void
+    {
+        if ($this->reserved) return;
+        if (is_array($value)) {
+            array_map(function ($v) {
+                $this->deleteFile($v);
+            }, $value);
+        }
+        $this->deleteFile($value);
     }
 }

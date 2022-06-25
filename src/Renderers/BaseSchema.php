@@ -20,6 +20,7 @@ use JsonSerializable;
  *
  * @method getValue($value) 给组件赋值时自定义处理
  * @method setValue($value) 组件赋值提交时自定义处理
+ * @method onDelete($value) 删除时自定义处理
  * @method defaultAttr() 可以自定义属性的设置
  */
 class BaseSchema implements JsonSerializable

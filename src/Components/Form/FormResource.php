@@ -525,7 +525,7 @@ trait FormResource
 
         DB::transaction(function () {
             $updates = $this->prepareUpdate($this->updates);
-            
+
             foreach ($updates as $key => $value) {
                 $this->model->setAttribute($key, $value);
             }
@@ -549,10 +549,19 @@ trait FormResource
 
             $ids = explode(',', $ids);
 
+            $items = $this->getItems();
 
             foreach ($this->builder->with($relations)->whereIn($this->getPrimaryKey(), $ids)->lazy() as $item) {
                 $this->model = $item;
-                //删除文件 TODO
+                /**@var Item $i */
+                foreach ($items as $i) {
+                    if (!collect($item)->has($i->getName())) continue;
+                    $component = $i->render();
+                    if (method_exists($component::class, 'onDelete')) {
+                        $value = data_get($item, $i->getName());
+                        $component->onDelete($value);
+                    }
+                }
 
                 //删除关联模型数据
                 $this->deleteRelation($relations);

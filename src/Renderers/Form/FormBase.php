@@ -3,6 +3,7 @@
 namespace SmallRuralDog\AmisAdmin\Renderers\Form;
 
 use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
+use Storage;
 
 /**
  * @method $this size($v)
@@ -37,5 +38,15 @@ use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 class FormBase extends BaseSchema
 {
     public string $type = "input-text";
+
+
+    protected function deleteFile($file): bool
+    {
+        $storage = Storage::disk(config('amis-admin.upload.disk'));
+        if ($storage->exists($file)) {
+            return $storage->delete($file);
+        }
+        return false;
+    }
 
 }
