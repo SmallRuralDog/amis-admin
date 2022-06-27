@@ -71,9 +71,12 @@ class Column
                 $typeComponent = $typeComponent();
             }
 
+            foreach ($this->tableColumn as $key => $value) {
+                if (!property_exists($typeComponent, $key)) {
+                    $typeComponent->$key = $value;
+                }
+            }
             $this->tableColumn = $typeComponent;
-
-            $this->tableColumn->name($this->name)->label($this->label);
         }
         return $this->tableColumn;
     }

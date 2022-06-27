@@ -75,9 +75,14 @@ class Item
             if ($typeComponent instanceof Closure) {
                 $typeComponent = $typeComponent();
             }
+            //组合已有的属性
+            foreach ($this->formItem as $key => $value) {
+                if (!property_exists($typeComponent, $key)) {
+                    $typeComponent->$key = $value;
+                }
+            }
+            //替换formItem
             $this->formItem = $typeComponent;
-
-            $this->formItem->name($this->name)->label($this->label);
         }
         return $this->formItem;
     }
