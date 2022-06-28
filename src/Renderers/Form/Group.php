@@ -12,4 +12,10 @@ namespace SmallRuralDog\AmisAdmin\Renderers\Form;
 class Group extends FormBase
 {
     public string $type = 'group';
+
+    public function directionVertical()
+    {
+        $this->direction('vertical');
+        return $this;
+    }
 }

@@ -89,7 +89,7 @@ class InputImage extends FormBase
     public function onDelete($value): void
     {
         if ($this->reserved) return;
-        if (is_array($value)) {
+        if ($value && is_array($value)) {
             array_map(function ($v) {
                 $this->deleteFile($v);
             }, $value);

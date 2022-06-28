@@ -42,9 +42,11 @@ class FormBase extends BaseSchema
 
     protected function deleteFile($file): bool
     {
-        $storage = Storage::disk(config('amis-admin.upload.disk'));
-        if ($storage->exists($file)) {
-            return $storage->delete($file);
+        if (is_string($file)) {
+            $storage = Storage::disk(config('amis-admin.upload.disk'));
+            if ($storage->exists($file)) {
+                return $storage->delete($file);
+            }
         }
         return false;
     }
