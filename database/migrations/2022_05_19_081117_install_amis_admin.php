@@ -55,6 +55,7 @@ return new class extends Migration {
             $table->string('target', 50)->nullable();
             $table->boolean('hidden')->default(false);
             $table->json('params')->nullable();
+            $table->json('active_menus')->nullable();
 
             $table->timestamps();
         });

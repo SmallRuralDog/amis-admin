@@ -13,6 +13,7 @@ class Menu extends Model
 
     protected $casts = [
         'params' => 'json',
+        'active_menus' => 'json',
     ];
 
     public function __construct(array $attributes = [])

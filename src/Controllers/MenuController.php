@@ -9,8 +9,10 @@ use SmallRuralDog\AmisAdmin\Models\Menu;
 use SmallRuralDog\AmisAdmin\Renderers\Alert;
 use SmallRuralDog\AmisAdmin\Renderers\Divider;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Group;
+use SmallRuralDog\AmisAdmin\Renderers\Form\InputArray;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputKV;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputNumber;
+use SmallRuralDog\AmisAdmin\Renderers\Form\InputText;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Select;
 use SmallRuralDog\AmisAdmin\Renderers\Form\TreeSelect;
 use SmallRuralDog\AmisAdmin\Renderers\Tpl;
@@ -82,17 +84,12 @@ class MenuController extends AdminController
                                 ['id' => 0, 'title' => '顶级菜单', 'children' => arr2tree($list)],
                             ];
                         })->labelField('title')->valueField("id")->value(0)),
-
-
                     $form->item('hidden', '隐藏')
                         ->useFormItem(Select::make()->options([
                             ['value' => 0, 'label' => '否'],
                             ['value' => 1, 'label' => '是'],
                         ])->value(0)),
-
                     $form->item('order', '排序')->useFormItem(InputNumber::make()->value(1)->min(1)->labelRemark('数字越小越靠前')),
-
-
                 ]),
 
                 Group::make()->body([
@@ -127,6 +124,9 @@ class MenuController extends AdminController
                         return $model::all();
                     })),
                 Divider::make(),
+
+                $form->item('active_menus', '菜单匹配')->useFormItem(InputArray::make()->items(InputText::make())),
+
                 $form->item('params', '自定义路由参数')->useFormItem(InputKV::make()),
 
             ]);

@@ -10,6 +10,7 @@ export const useMenuStore = defineStore("menu", () => {
         isSlider: false,
         menuActive: "menus",
         menuData: [] as IMenu[],
+        activeMenus: {} as { [key: string]: string[] },
     })
 
 
@@ -24,26 +25,31 @@ export const useMenuStore = defineStore("menu", () => {
 
     const getMenuData = async () => {
         const res = await useGetMenu()
-        menuInfo.menuData = res.data
+        menuInfo.menuData = res.data.menus
+        menuInfo.activeMenus = res.data.active_menus
+        getActiveMenu(selfMenuPath.value)
     }
 
     onMounted(getMenuData)
-
     const route = useRoute()
-
     watch(() => route.path, path => {
-        menuInfo.menuActive = selfMenuPath.value
+        getActiveMenu(selfMenuPath.value)
     })
-
+    const getActiveMenu = (path: string) => {
+        for (let [key, value] of Object.entries(menuInfo.activeMenus)) {
+            if (value.includes(path)) {
+                console.log("key",key)
+                menuInfo.menuActive = key
+                break;
+            }
+        }
+    }
     const selfMenuPath = computed<string>(() => {
         return route.path.replace(/^\//, '').split('/')[0]
     })
-
     menuInfo.menuActive = selfMenuPath.value
-
     return {
         menuInfo,
         toggleCollapse,
-
     }
 })

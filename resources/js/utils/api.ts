@@ -2,7 +2,10 @@ import http from "./http";
 
 
 export async function useGetMenu() {
-    return await http.get<ResType<IMenu[]>>("/getMenu");
+    return await http.get<ResType<{
+        active_menus: { [key: string]: string[] },
+        menus: IMenu[]
+    }>>("/getMenu");
 }
 
 export async function useGetToolbar() {

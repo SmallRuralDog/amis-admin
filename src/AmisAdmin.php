@@ -95,10 +95,17 @@ class AmisAdmin
             if ($menu->uri_type == 'route') {
                 $menu->uri = Str::start($menu->uri, '/');
             }
+
+            $menu->active_menus = array_merge($menu->active_menus ?? [], [$menu->key]);
+
             return $menu;
         });
 
-        return arr2tree($list->toArray());
+
+        return [
+            'active_menus' => $list->pluck('active_menus', 'key')->toArray(),
+            'menus' => arr2tree($list->toArray()),
+        ];
     }
 
     public function validatorData(array $all, $rules, $message = []): \Illuminate\Validation\Validator
