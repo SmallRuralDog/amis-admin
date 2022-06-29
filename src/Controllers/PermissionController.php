@@ -2,9 +2,12 @@
 
 namespace SmallRuralDog\AmisAdmin\Controllers;
 
+use AmisAdmin;
 use Illuminate\Database\Eloquent\Model;
 use SmallRuralDog\AmisAdmin\Components\Form;
 use SmallRuralDog\AmisAdmin\Components\Grid;
+use SmallRuralDog\AmisAdmin\Models\Permission;
+use SmallRuralDog\AmisAdmin\Renderers\Action\AjaxAction;
 use SmallRuralDog\AmisAdmin\Renderers\Alert;
 use SmallRuralDog\AmisAdmin\Renderers\Each;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Checkboxes;
@@ -47,7 +50,7 @@ class PermissionController extends AdminController
             $grid->usePage()->title("权限管理")->remark("在这里你可以管理权限");
 
             $grid->column('slug', "标识")->useTableColumn()->copyable(true);
-            $grid->column('name', "名称")->useTableColumn();
+            $grid->column('name', "名称")->inputText();
             $grid->column('http_method', "请求方式")
                 ->useTableColumn(Each::make()->placeholder("<span class='label label-default'>ANY</span>")
                     ->items(Tpl::make()->tpl("<span class='label label-default m-l-sm'><%= this.item %></span>")));
@@ -74,6 +77,11 @@ class PermissionController extends AdminController
 
             $grid->toolbar(function (Grid\Toolbar $toolbar) {
 
+                $api = "get:" . route("amis-admin.permission.auto-generate");
+                $action = AjaxAction::make()->label("自动生成权限")
+                    ->confirmText("确定要自动生成权限吗？")
+                    ->level('success')->api($api);
+                $toolbar->addHeaderToolbar($action);
             });
 
         });
@@ -196,5 +204,54 @@ class PermissionController extends AdminController
                 'label' => $method
             ];
         })->toArray();
+    }
+
+    public function autoGenerate()
+    {
+
+        $routes = $this->getRoutes();
+
+        $excepts = config('amis-admin.permission.excepts', []);
+
+        $routes = collect($routes)->filter(function ($route) {
+            return Str::contains($route['value'], '*')
+                && !Str::endsWith($route['value'], '/*')
+                && !Str::endsWith($route['value'], ['edit', 'edit*', 'create*', 'create']);
+        })->map(function ($route) {
+            return $route['value'];
+        })->filter(function ($route) use ($excepts) {
+            return !Str::contains($route, $excepts);
+        })->values()->all();
+
+
+        $contain = [];
+
+        foreach ($routes as $route) {
+            foreach ($routes as $route2) {
+                if ($route != $route2 && Str::is($route, $route2)) {
+                    $contain[] = $route2;
+                }
+            }
+        }
+        $routes = collect($routes)->filter(function ($route) use ($contain) {
+            return !in_array($route, $contain);
+        })->values()->all();
+        /**@var Permission $model */
+        $model = config('amis-admin.database.permissions_model');
+
+        foreach ($routes as $route) {
+            $slug = str_replace(array('*', '/'), '', $route);
+            $name = $slug;
+            $http_path = [$route];
+            $model::query()
+                ->firstOrCreate([
+                    'slug' => $slug,
+                ], [
+                    'name' => $name,
+                    'http_path' => $http_path,
+                ]);
+        }
+
+        return AmisAdmin::responseMessage("权限自动生成成功");
     }
 }

@@ -34,6 +34,13 @@ class Menu extends Model
         return $this->belongsToMany($relatedModel, $pivotTable, 'menu_id', 'role_id');
     }
 
+    public function permissions(): BelongsToMany
+    {
+        $pivotTable = config('amis-admin.database.permission_menu_table');
+        $relatedModel = config('amis-admin.database.permissions_model');
+        return $this->belongsToMany($relatedModel, $pivotTable, 'menu_id', 'permission_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

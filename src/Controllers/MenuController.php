@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use SmallRuralDog\AmisAdmin\Components\Form;
 use SmallRuralDog\AmisAdmin\Components\Grid;
 use SmallRuralDog\AmisAdmin\Models\Menu;
+use SmallRuralDog\AmisAdmin\Models\Permission;
 use SmallRuralDog\AmisAdmin\Renderers\Alert;
 use SmallRuralDog\AmisAdmin\Renderers\Divider;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Group;
@@ -112,7 +113,6 @@ class MenuController extends AdminController
                     $form->item('uri', '外部链接')->useFormItem()->type("input-url")->clearable(true)->visibleOn("data.uri_type=='url'")->placeholder("https://xxx.xxx.xxx.xxx"),
 
                 ]),
-                Divider::make(),
                 $form->item('roles', "授权角色")->useFormItem(Select::make()->extractValue(true)
                     ->joinValues(false)
                     ->multiple(true)
@@ -123,6 +123,17 @@ class MenuController extends AdminController
                         /**@var Model $model */
                         $model = config('amis-admin.database.roles_model');
                         return $model::all();
+                    })),
+                $form->item('permissions', '权限绑定')->useFormItem(TreeSelect::make()
+                    ->extractValue(true)
+                    ->joinValues(false)
+                    ->multiple(true)
+                    ->labelField("name")
+                    ->valueField("id")
+                    ->options(function () {
+                        $list = Permission::query()
+                            ->orderBy('order')->get()->toArray();
+                        return arr2tree($list);
                     })),
                 Divider::make(),
 

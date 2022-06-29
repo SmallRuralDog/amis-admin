@@ -34,4 +34,5 @@ Route::group([
     $router->resource('menus', MenuController::class)->names('amis-admin.menu');
     $router->resource('roles', RoleController::class)->names('amis-admin.role');
     $router->resource('permissions', PermissionController::class)->names('amis-admin.permission');
+    $router->get('permissions_auto_generate', [PermissionController::class, 'autoGenerate'])->name('amis-admin.permission.auto-generate');
 });

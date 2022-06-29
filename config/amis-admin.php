@@ -76,7 +76,7 @@ return [
             '_handle_action_',
             '_handle_upload_image_',
             '_handle_upload_file_',
-            'view/*',
+            'view*',
         ],
     ],
     'upload' => [
