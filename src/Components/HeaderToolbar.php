@@ -5,7 +5,6 @@ namespace SmallRuralDog\AmisAdmin\Components;
 use AmisAdmin;
 use Illuminate\Support\Collection;
 use JsonSerializable;
-use SmallRuralDog\AmisAdmin\Renderers\Action\AjaxAction;
 use SmallRuralDog\AmisAdmin\Renderers\Action\LinkAction;
 use SmallRuralDog\AmisAdmin\Renderers\Action\UrlAction;
 use SmallRuralDog\AmisAdmin\Renderers\DropdownButton;
@@ -59,7 +58,8 @@ class HeaderToolbar implements JsonSerializable
         );
 
 
-        $userinfo->label($user->name)->buttons($buttons->toArray());
+        $userinfo->label($user->name)
+            ->buttons($buttons->toArray());
 
         $this->right->add($userinfo);
     }

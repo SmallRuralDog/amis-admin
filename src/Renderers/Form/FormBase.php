@@ -27,6 +27,7 @@ use Storage;
  * @method $this inputClassName($v)
  * @method $this placeholder($v)
  * @method $this required($v)
+ * @method $this requiredOn($v)
  * @method $this validationErrors($v)
  * @method $this validations($v)
  * @method $this value($v)

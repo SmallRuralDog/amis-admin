@@ -9,6 +9,7 @@ use SmallRuralDog\AmisAdmin\Models\Menu;
 use SmallRuralDog\AmisAdmin\Renderers\Alert;
 use SmallRuralDog\AmisAdmin\Renderers\Divider;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Group;
+use SmallRuralDog\AmisAdmin\Renderers\Form\IconPicker;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputArray;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputKV;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputNumber;
@@ -72,7 +73,8 @@ class MenuController extends AdminController
                     $form->item('key', '标识')
                         ->required()
                         ->useFormItem()->description("菜单标识，必填并且不能重复"),
-                    $form->item('icon', '图标')->useFormItem()->clearable(true)
+                    $form->item('icon', '图标')->useFormItem(IconPicker::make())
+                        ->requiredOn('parent_id==0')
                         ->description("可以使用<a target='_blank' href='https://fontawesome.com/search?m=free'>Font Awesome</a>图标")->placeholder("fa fa-xxx"),
                 ]),
 
