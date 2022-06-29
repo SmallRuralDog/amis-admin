@@ -10,8 +10,13 @@ class AutoRoute implements JsonSerializable
 
     use AutoRouteAction;
 
+    public static function make()
+    {
+        return new static();
+    }
 
-    protected function render()
+
+    public function render()
     {
         return Tpl::make();
     }

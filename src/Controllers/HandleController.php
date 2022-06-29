@@ -20,7 +20,7 @@ class HandleController extends Controller
             $validator = AmisAdmin::validatorData($data, [
                 'action' => 'required|string',
                 'class' => 'required|string',
-                'params' => 'required|array',
+                'params' => 'array',
             ]);
             if ($validator->fails()) {
                 abort(400, $validator->errors()->first());
