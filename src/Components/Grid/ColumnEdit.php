@@ -14,7 +14,7 @@ trait ColumnEdit
         $this->quickEdit([
             'type' => 'switch',
             'mode' => 'inline',
-            "saveImmediately" => true,
+            //"saveImmediately" => true,
         ])->width(50)->align('center');
         return $this;
     }
@@ -25,7 +25,7 @@ trait ColumnEdit
      * @param bool $saveImmediately 是否立即保存
      * @return Column|ColumnEdit
      */
-    public function inputText(bool $inline = false, bool $saveImmediately = true): self
+    public function inputText(bool $inline = false, bool $saveImmediately = false): self
     {
         $this->quickEdit([
             'type' => 'input-text',
@@ -41,7 +41,7 @@ trait ColumnEdit
      * @param bool $saveImmediately 是否立即保存
      * @return Column|ColumnEdit
      */
-    public function inputNumber(bool $inline = false, bool $saveImmediately = true): self
+    public function inputNumber(bool $inline = false, bool $saveImmediately = false): self
     {
         $this->quickEdit([
             'type' => 'input-number',

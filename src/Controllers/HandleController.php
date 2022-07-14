@@ -21,6 +21,7 @@ class HandleController extends Controller
                 'action' => 'required|string',
                 'class' => 'required|string',
                 'params' => 'array',
+                'data' => 'array',
             ]);
             if ($validator->fails()) {
                 abort(400, $validator->errors()->first());
@@ -28,7 +29,8 @@ class HandleController extends Controller
             $class = Crypt::decryptString($data['class']);
             $action = $data['action'];
             $params = $data['params'];
-            $res = (new $class())->$action($params);
+            $data = $data['data'];
+            $res = (new $class())->$action($params, $data);
             return $res ?? AmisAdmin::responseMessage('请求成功');
         } catch (Exception $e) {
             return AmisAdmin::responseError($e->getMessage());

@@ -16,18 +16,19 @@ trait AutoRouteAction
      * @param string $method
      * @return array
      */
-    public function action(string $actionName, array $params = [], string $method = "post"): array
+    public function action(string $actionName, array $params = [], array $data = [], string $method = "post"): array
     {
         $class = Crypt::encryptString($this::class);
-        $data = [
+        $d = [
             'class' => $class,
             'action' => $actionName,
-            'params' => $params
+            'data' => $data,
+            'params' => $params,
         ];
         return [
             'method' => $method,
             "url" => urldecode(route('amis-admin.handle-action', $params)),
-            "data" => $data,
+            "data" => $d,
         ];
     }
 }

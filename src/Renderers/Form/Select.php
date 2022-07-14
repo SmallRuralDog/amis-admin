@@ -26,5 +26,9 @@ class Select extends FormOptions
         $this->searchable(true);
     }
 
+    public function defaultAttr()
+    {
+        $this->joinValues(false)->extractValue(true);
+    }
 
 }
