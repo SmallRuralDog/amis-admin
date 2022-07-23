@@ -16,6 +16,7 @@ use SmallRuralDog\AmisAdmin\Renderers\Form\InputNumber;
 use SmallRuralDog\AmisAdmin\Renderers\Form\InputText;
 use SmallRuralDog\AmisAdmin\Renderers\Form\Select;
 use SmallRuralDog\AmisAdmin\Renderers\Form\TreeSelect;
+use SmallRuralDog\AmisAdmin\Renderers\Status;
 use SmallRuralDog\AmisAdmin\Renderers\Tpl;
 
 class MenuController extends AdminController
@@ -43,9 +44,9 @@ class MenuController extends AdminController
 
             $grid->column('uri', '链接')->useTableColumn()->quickEdit(true);
 
-            $grid->column('order', '排序')->width(100)->inputNumber(true)->useTableColumn();
+            $grid->column('order', '排序')->useTableColumn()->quickEdit(true);
 
-            $grid->column('hidden', '隐藏')->width(100)->align('center')->switch()->useTableColumn();
+            $grid->column('hidden', '隐藏')->width(100)->align('center')->useTableColumn(Status::make());
 
             $grid->dialogForm('lg');
             $grid->actions(function (Grid\Actions $actions) {
