@@ -32,13 +32,24 @@ function admin_url($path = '', $parameters = [], $secure = null)
     return url($path, $parameters, $secure);
 }
 
+if (!function_exists('route_get')) {
+    function route_get($name, $parameters = [], $absolute = true)
+    {
+        $url = app('url')->route($name, $parameters, $absolute);
+        if (config('amis-admin.https')) {
+            return str_replace('http://', 'https://', $url);
+        }
+        return $url;
+    }
+}
+
 function admin_route($path = ''): string
 {
 
     $prefix = trim(config('amis-admin.route.prefix'));
     $path = str_replace($prefix . '/', '/', $path);
 
-    return Str::of($path)->finish('/')->start('/')->rtrim("/")->value();
+    return Str::of($path)->finish('/')->start('/')->rtrim("/")->toString();
 }
 
 

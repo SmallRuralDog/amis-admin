@@ -53,7 +53,7 @@ class HeaderToolbar implements JsonSerializable
             UrlAction::make()
                 ->label("退出登录")
                 ->icon('fa-solid fa-arrow-right-from-bracket mr-2')
-                ->url(route('amis-admin.logout'))
+                ->url(route_get('amis-admin.logout'))
                 ->confirmText('确定退出登录吗？'),
         );
 

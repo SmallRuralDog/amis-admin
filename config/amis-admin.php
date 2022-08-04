@@ -58,7 +58,7 @@ return [
         //未登录跳转路由
         'redirect_to' => 'view/login',
         //登录成功跳转路由
-        'login_redirect' => 'home  ',
+        'login_redirect' => 'home',
         //无需登录的路由
         'excepts' => [
             'login',

@@ -27,7 +27,7 @@ class AuthController extends Controller
         $login = AmisForm::make()
             ->title("登录")
             ->wrapWithPanel(false)
-            ->api(route('amis-admin.login.index'))
+            ->api(route_get('amis-admin.login.index'))
             ->redirect(admin_route(config('amis-admin.auth.login_redirect')))
             ->body([
                 InputText::make()->name('username')->label('用户名')->required(true)->placeholder("请输入用户名"),

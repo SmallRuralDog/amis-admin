@@ -77,7 +77,7 @@ class PermissionController extends AdminController
 
             $grid->toolbar(function (Grid\Toolbar $toolbar) {
 
-                $api = "get:" . route("amis-admin.permission.auto-generate");
+                $api = "get:" . route_get("amis-admin.permission.auto-generate");
                 $action = AjaxAction::make()->label("自动生成权限")
                     ->confirmText("确定要自动生成权限吗？")
                     ->level('success')->api($api);

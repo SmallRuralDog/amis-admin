@@ -58,37 +58,37 @@ trait ModelBase
 
     public function getIndexUrl($parameters = []): string
     {
-        return route($this->getRouteName() . '.index', $parameters, false);
+        return route_get($this->getRouteName() . '.index', $parameters, false);
     }
 
     public function getCreateUrl($parameters = []): string
     {
-        return route($this->getRouteName() . '.create', $parameters, false);
+        return route_get($this->getRouteName() . '.create', $parameters, false);
     }
 
 
     public function getStoreUrl($parameters = []): string
     {
-        return 'post:' . route($this->getRouteName() . '.store', $parameters, false);
+        return 'post:' . route_get($this->getRouteName() . '.store', $parameters, false);
     }
 
     public function getShowUrl($key, $parameters = []): string
     {
-        return route($this->getRouteName() . '.index', $parameters, false) . '/' . $key;
+        return route_get($this->getRouteName() . '.index', $parameters, false) . '/' . $key;
     }
 
     public function getEditUrl($key, $parameters = []): string
     {
-        return route($this->getRouteName() . '.index', $parameters, false) . '/${' . $key . '}/edit';
+        return route_get($this->getRouteName() . '.index', $parameters, false) . '/${' . $key . '}/edit';
     }
 
     public function getUpdateUrl($key): string
     {
-        return 'put:' . route($this->routeName . '.index') . '/' . $key;
+        return 'put:' . route_get($this->routeName . '.index') . '/' . $key;
     }
 
     public function getDestroyUrl($key): string
     {
-        return 'delete:' . route($this->getRouteName() . '.index') . '/' . $key;
+        return 'delete:' . route_get($this->getRouteName() . '.index') . '/' . $key;
     }
 }

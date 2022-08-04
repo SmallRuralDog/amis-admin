@@ -42,7 +42,7 @@ class InputImage extends FormBase
 
     public function __construct()
     {
-        $this->receiver(route('amis-admin.handle-upload-image'));
+        $this->receiver(route_get('amis-admin.handle-upload-image'));
     }
 
     /**
@@ -51,7 +51,7 @@ class InputImage extends FormBase
      */
     public function uniqueName(): self
     {
-        $this->receiver(route('amis-admin.handle-upload-image', ['unique_name' => true]));
+        $this->receiver(route_get('amis-admin.handle-upload-image', ['unique_name' => true]));
         return $this;
     }
 

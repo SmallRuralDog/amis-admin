@@ -24,7 +24,7 @@ class SettingsController extends Controller
         $form = AmisForm::make()
             ->data(settings()->all())
             ->name("setting-form")->wrapWithPanel(false)
-            ->api(route('admin.setting.save'));
+            ->api(route_get('admin.setting.save'));
         $form->body([
             Tabs::make()
                 ->tabsMode("chrome")
