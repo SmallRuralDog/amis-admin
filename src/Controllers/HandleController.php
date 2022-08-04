@@ -92,6 +92,7 @@ class HandleController extends Controller
             } else {
                 $path = $file->storeAs($path, $name, $disk);
             }
+            abort_if(!$path, 400, '上传失败');
 
             $url = Storage::disk($disk)->url($path);
 
