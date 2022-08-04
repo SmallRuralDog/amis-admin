@@ -5,6 +5,7 @@ namespace SmallRuralDog\AmisAdmin\Components\Form;
 use Closure;
 use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
+use SmallRuralDog\AmisAdmin\Renderers\Form\Hidden;
 
 trait FormMain
 {
@@ -113,8 +114,10 @@ trait FormMain
             $this->form->redirect("back()");
         }
 
+        $items[] = Hidden::make()->name('_token')->value(csrf_token());
+
         $this->form->body($items);
-        
+
         return $this->form;
 
     }
