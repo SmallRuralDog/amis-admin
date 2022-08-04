@@ -124,7 +124,7 @@ class AuthController extends Controller
         $form = AmisForm::make()
             ->data(AmisAdmin::user())
             //->resetAfterSubmit(true)
-            ->api(route('amis-admin.userSetting'));
+            ->api(route_get('amis-admin.userSetting'));
         $form->body([
             InputImage::make()->name('avatar')->label('头像'),
             InputText::make()->name('username')->label('用户名')->readOnly(true)->disabled(true),
