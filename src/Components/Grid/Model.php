@@ -71,7 +71,7 @@ class Model
         if (count($where) <= 0) return;
         $filterField = $this->grid->getFilterField();
         foreach ($where as $key => $value) {
-            if (empty($value)) continue;
+            if (!isset($value)) continue;
             $field = collect($filterField)->filter(function ($field) use ($key) {
                 return $field['field'] === $key;
             })->first();
