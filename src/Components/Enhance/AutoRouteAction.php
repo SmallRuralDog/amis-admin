@@ -27,7 +27,7 @@ trait AutoRouteAction
         ];
         return [
             'method' => $method,
-            "url" => urldecode(route('amis-admin.handle-action', $params)),
+            "url" => urldecode(route_get('amis-admin.handle-action', $params)),
             "data" => $d,
         ];
     }
