@@ -105,6 +105,7 @@ class AdminUserController extends AdminController
             });
 
             $form->saving(function (Form $form) {
+                $form->deleteInput('password_confirmation');
                 if ($form->password && $form->model()->get('password') != $form->password) {
                     $form->password = bcrypt($form->password);
                 }
