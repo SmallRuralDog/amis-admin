@@ -24,6 +24,7 @@ trait AutoRouteAction
             'action' => $actionName,
             'data' => $data,
             'params' => $params,
+            '_token' => csrf_token(),
         ];
         return [
             'method' => $method,

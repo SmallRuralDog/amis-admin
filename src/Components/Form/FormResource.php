@@ -4,6 +4,7 @@ namespace SmallRuralDog\AmisAdmin\Components\Form;
 
 use AmisAdmin;
 use Arr;
+use DB;
 use Exception;
 use Illuminate\Database\Eloquent\Relations;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -523,16 +524,16 @@ trait FormResource
         $this->prepare($data);
 
         //TODO There is no active transaction
-        //DB::transaction(function () {
-        $updates = $this->prepareUpdate($this->updates);
+        DB::transaction(function () {
+            $updates = $this->prepareUpdate($this->updates);
 
-        foreach ($updates as $key => $value) {
-            $this->model->setAttribute($key, $value);
-        }
-        $this->model->save();
-        $this->updateRelation($this->relations);
-        $this->callTransaction();
-        //});
+            foreach ($updates as $key => $value) {
+                $this->model->setAttribute($key, $value);
+            }
+            $this->model->save();
+            $this->updateRelation($this->relations);
+            $this->callTransaction();
+        });
         $this->callSaved();
     }
 
