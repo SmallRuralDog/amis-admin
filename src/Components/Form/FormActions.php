@@ -2,7 +2,7 @@
 
 namespace SmallRuralDog\AmisAdmin\Components\Form;
 
-use SmallRuralDog\AmisAdmin\Components\Grid\GridActions;
+use Closure;
 
 trait FormActions
 {
@@ -11,6 +11,17 @@ trait FormActions
 
     //禁用操作
     protected bool $disableAction = false;
+
+    /**
+     * 表单自定义操作
+     * @param Closure $fun
+     * @return FormActions|\SmallRuralDog\AmisAdmin\Components\Form
+     */
+    public function actions(Closure $fun): self
+    {
+        $fun($this->actions);
+        return $this;
+    }
 
     /**
      * 禁用所有操作

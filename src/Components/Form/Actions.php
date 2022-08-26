@@ -11,6 +11,9 @@ class Actions
     protected bool $disableSubmitAction = false;
     protected bool $disableResetAction = false;
 
+    protected array $prependList = [];
+    protected array $addList = [];
+
     public function __construct(protected Form $form)
     {
     }
@@ -64,17 +67,43 @@ class Actions
     }
 
     /**
+     * 前置添加操作
+     * @param $node
+     * @return $this
+     */
+    public function prepend($node): self
+    {
+        $this->prependList[] = $node;
+        return $this;
+    }
+
+    /**
+     * 后置添加操作
+     * @param $node
+     * @return $this
+     */
+    public function add($node): self
+    {
+        $this->addList[] = $node;
+        return $this;
+    }
+
+    /**
      * render
      * @return array
      */
     public function render(): array
     {
         $res = collect([]);
-
+        foreach ($this->prependList as $node) {
+            $res->prepend($node);
+        }
         foreach ($this->initAction() as $node) {
             $res->add($node);
         }
-
+        foreach ($this->addList as $node) {
+            $res->add($node);
+        }
         return $res->toArray();
     }
 }
