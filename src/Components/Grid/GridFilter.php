@@ -31,6 +31,7 @@ trait GridFilter
     private function buildFilter(): void
     {
         $this->filter->body($this->filter->renderBody());
+        $this->filter->data($this->filter->getDefaultValue());
     }
 
     private function renderFilter()

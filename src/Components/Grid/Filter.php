@@ -17,6 +17,7 @@ class Filter extends AmisForm
 {
     private array $filterItems = [];
     private array $filterField = [];
+    private array $defaultValue = [];
 
     public function __construct()
     {
@@ -62,6 +63,28 @@ class Filter extends AmisForm
             $items[] = Button::make()->label("重置")->type("reset");
         }
         return $items;
+    }
+
+    /**
+     * 设置搜索表单默认值
+     * @param array $defaultValue
+     * @return Filter
+     */
+    public function defaultValue(array $defaultValue)
+    {
+        foreach ($defaultValue as $key => $value) {
+            $this->defaultValue["search.$key"] = $value;
+        }
+        return $this;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getDefaultValue(): array
+    {
+        return $this->defaultValue;
     }
 
     public function where($name, $label = '', Closure $fun = null): Item
