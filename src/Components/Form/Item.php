@@ -30,7 +30,7 @@ use Str;
  * @method $this placeholder($v) 占位符
  * @method $this validationErrors($v) 验证失败的提示信息
  * @method $this validations($v)
- * @method $this value($v) 默认值，切记只能是静态值，不支持取变量，跟数据关联是通过设置 name 属性来实现的。
+ * @method $this value($v) 默认值
  * @method $this clearValueOnHidden($v) 表单项隐藏时，是否在当前 Form 中删除掉该表单项值。注意同名的未隐藏的表单项值也会删掉
  * @method $this validateApi($v) 远端校验表单项接口
  *

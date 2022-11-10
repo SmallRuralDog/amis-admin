@@ -84,14 +84,17 @@ const build = () => {
                 const queryArr = to.split('&').filter(item => {
                     return item.indexOf('search[') === -1
                 });
-                const path = route.path + queryArr.join('&')
-
+                let query = queryArr.join('&')
+                //判断是否?开头
+                if (query.indexOf('?') !== 0) {
+                    query = '?' + query
+                }
+                const path = route.path + query
                 if (replace) {
                     router.replace(path)
                 } else {
                     router.push(path)
                 }
-
             },
             affixOffsetTop: 48,
         }
