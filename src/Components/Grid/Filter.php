@@ -21,6 +21,7 @@ class Filter extends AmisForm
 
     public function __construct()
     {
+        parent::__construct();
         $this->title("搜索");
         $this->submitText("");
         $this->mode("inline")->wrapWithPanel(false)->className('mb-3 bg-search px-2 pt-3');
@@ -70,10 +71,10 @@ class Filter extends AmisForm
      * @param array $defaultValue
      * @return Filter
      */
-    public function defaultValue(array $defaultValue)
+    public function defaultValue(array $defaultValue): Filter
     {
         foreach ($defaultValue as $key => $value) {
-            $this->defaultValue["search.$key"] = $value;
+            $this->defaultValue["search"][$key] = $value;
         }
         return $this;
     }
