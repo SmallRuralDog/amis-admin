@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\HtmlString;
 use SmallRuralDog\AmisAdmin\Extensions\SettingStorage;
 
@@ -129,7 +128,7 @@ if (!function_exists('settings')) {
 
 function vite_assets(): HtmlString
 {
-    $devServerIsRunning = false;
+    /*$devServerIsRunning = false;
     if (app()->environment('local')) {
         try {
             Http::get("http://192.168.6.178:3600");
@@ -143,7 +142,7 @@ function vite_assets(): HtmlString
             <script type="module" src="http://192.168.6.178:3600/resources/js/main.ts"></script>
         HTML
         );
-    }
+    }*/
     $manifest = json_decode(file_get_contents(
         public_path('vendor/admin/manifest.json')
     ), true);
