@@ -13,7 +13,7 @@ class RootController extends Controller
         $config = [
             'name' => config('amis-admin.name'),
             'title' => config('amis-admin.title'),
-            'apiBase' => admin_url(config('amis-admin.route.prefix')),
+            'apiBase' => admin_url("/"),
             'prefix' => config('amis-admin.route.prefix'),
             'loginLogo' => config('amis-admin.loginLogo'),
             'loginDesc' => config('amis-admin.loginDesc'),
