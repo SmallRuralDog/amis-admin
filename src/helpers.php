@@ -28,7 +28,7 @@ function admin_url($path = '', $parameters = [], $secure = null)
         return $path;
     }
     $secure = $secure ?: (config('amis-admin.https') || config('amis-admin.secure'));
-    return url($path, $parameters, $secure);
+    return url(admin_base_path($path), $parameters, $secure);
 }
 
 if (!function_exists('route_get')) {
