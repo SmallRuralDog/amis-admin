@@ -9,6 +9,8 @@ namespace SmallRuralDog\AmisAdmin\Renderers\Form;
  * @method $this utc($v)
  * @method $this emebed($v)
  * @method $this borderMode($v)
+ * @method $this minDate($v)
+ * @method $this maxDate($v)
  */
 class InputDate extends FormBase
 {
@@ -19,6 +21,5 @@ class InputDate extends FormBase
     {
         $this->format("YYYY-MM-DD HH:mm:ss");
     }
-
 
 }
