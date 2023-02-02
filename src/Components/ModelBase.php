@@ -2,7 +2,7 @@
 
 namespace SmallRuralDog\AmisAdmin\Components;
 
-use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 trait ModelBase
 {
