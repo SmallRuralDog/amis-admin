@@ -6,6 +6,7 @@ use Closure;
 use SmallRuralDog\AmisAdmin\Renderers\Date;
 use SmallRuralDog\AmisAdmin\Renderers\Each;
 use SmallRuralDog\AmisAdmin\Renderers\Image;
+use SmallRuralDog\AmisAdmin\Renderers\Status;
 use SmallRuralDog\AmisAdmin\Renderers\Tpl;
 
 trait ColumnDisplay
@@ -77,6 +78,20 @@ trait ColumnDisplay
             $closure($date);
         }
         $this->useTableColumn($date);
+        return $this;
+    }
+
+    /**
+     * 状态渲染
+     * @param Closure<Status>|null $closure
+     * @return ColumnDisplay|Column
+     */
+    public function status(Closure $closure = null):self{
+        $status = Status::make();
+        if ($closure) {
+            $closure($status);
+        }
+        $this->useTableColumn($status);
         return $this;
     }
 
