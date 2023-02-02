@@ -128,21 +128,26 @@ if (!function_exists('settings')) {
 
 function vite_assets(): HtmlString
 {
-    /*$devServerIsRunning = false;
+
     if (app()->environment('local')) {
-        try {
-            Http::get("http://192.168.6.178:3600");
-            $devServerIsRunning = true;
-        } catch (Exception) {
+        $devServerIsRunning = false;
+        $viteUrl = env("VITE_URL");
+        if ($viteUrl) {
+            try {
+                Http::get($viteUrl);
+                $devServerIsRunning = true;
+            } catch (Exception) {
+            }
+            if ($devServerIsRunning) {
+                return new HtmlString(<<<HTML
+            <script type="module" src="$viteUrl/@vite/client"></script>
+            <script type="module" src="$viteUrl/resources/js/main.ts"></script>
+        HTML
+                );
+            }
         }
     }
-    if ($devServerIsRunning) {
-        return new HtmlString(<<<HTML
-            <script type="module" src="http://192.168.6.178:3600/@vite/client"></script>
-            <script type="module" src="http://192.168.6.178:3600/resources/js/main.ts"></script>
-        HTML
-        );
-    }*/
+
     $manifest = json_decode(file_get_contents(
         public_path('vendor/admin/manifest.json')
     ), true);
