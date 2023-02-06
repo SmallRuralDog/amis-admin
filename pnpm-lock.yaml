@@ -43,7 +43,7 @@ devDependencies:
   autoprefixer: 10.4.6_postcss@8.4.13
   postcss: 8.4.13
   sass: 1.51.0
-  tailwindcss: 3.0.24
+  tailwindcss: 3.0.24_postcss@8.4.13
   typescript: 4.6.4
   unplugin-auto-import: 0.7.1_utbicujaitsyfhhenhpcxjwwzu
   unplugin-vue-components: 0.19.3_vite@2.9.6+vue@3.2.33
@@ -1585,10 +1585,12 @@ packages:
     resolution: {integrity: sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=}
     dev: true
 
-  /tailwindcss/3.0.24:
+  /tailwindcss/3.0.24_postcss@8.4.13:
     resolution: {integrity: sha512-H3uMmZNWzG6aqmg9q07ZIRNIawoiEcNFKDfL+YzOPuPsXuDXxJxB9icqzLgdzKNwjG3SAro2h9SYav8ewXNgig==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.1
       chokidar: 3.5.3
