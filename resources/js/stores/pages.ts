@@ -14,6 +14,7 @@ export const usePagesStore = defineStore("pages", () => {
     const thisPage = reactive({
         loading: true,
         error: false,
+        errorMessage:"",
         pageJson: null as any,
     })
 
@@ -33,11 +34,16 @@ export const usePagesStore = defineStore("pages", () => {
             const res = await useGetPageJson(path)
             pages[path] = res.data
             thisPage.pageJson = pages[path]
+            thisPage.error = false
             thisPage.loading = false
             internalInstance?.appContext.config.globalProperties.$Progress.finish();
         } catch (e) {
+            console.log(e)
             thisPage.error = true
             thisPage.loading = false
+            // @ts-ignore
+            thisPage.errorMessage= e.message
+            internalInstance?.appContext.config.globalProperties.$Progress.fail();
         }
     }
 

@@ -38,7 +38,6 @@ export const useMenuStore = defineStore("menu", () => {
     const getActiveMenu = (path: string) => {
         for (let [key, value] of Object.entries(menuInfo.activeMenus)) {
             if (value.includes(path)) {
-                console.log("key",key)
                 menuInfo.menuActive = key
                 break;
             }

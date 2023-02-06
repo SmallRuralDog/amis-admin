@@ -1,8 +1,11 @@
 <template>
-    <div class="amis-page" >
+    <div class="amis-page">
         <transition name="slide-up" mode="out-in">
-            <AMisRenderer :key="route.path" :amis-json="thisPage.pageJson" v-if="thisPage.pageJson"/>
+            <AMisRenderer :key="route.path" :amis-json="thisPage.pageJson" v-if="!thisPage.error && thisPage.pageJson"/>
         </transition>
+        <div v-if="thisPage.error && !thisPage.loading">
+            <el-alert :closable="false" type="error" show-icon>{{ thisPage.errorMessage }}</el-alert>
+        </div>
     </div>
 </template>
 
@@ -13,6 +16,7 @@ import {onMounted, watch} from "vue";
 import AMisRenderer from "@/components/amis/AMisRenderer.vue";
 import {storeToRefs} from "pinia";
 import {usePagesStore} from "@/stores/pages";
+import ErrorPage from "@/views/ErrorPage.vue";
 
 const {thisPage} = storeToRefs(usePagesStore())
 const {getPageJson} = usePagesStore()
@@ -27,5 +31,4 @@ onMounted(async () => {
 })
 </script>
 <style lang="scss">
-
 </style>
