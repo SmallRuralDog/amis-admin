@@ -34,4 +34,13 @@ class Images extends BaseSchema
         }
         return admin_file_url($value);
     }
+
+    /**
+     * 静态模式
+     * @return $this
+     */
+    public function static(){
+        $this->type = 'static-images';
+        return $this;
+    }
 }

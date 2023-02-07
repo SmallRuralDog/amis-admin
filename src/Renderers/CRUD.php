@@ -50,6 +50,7 @@ use SmallRuralDog\AmisAdmin\Renderers\Table\Table;
  * @method $this alwaysShowPagination($v)
  * @method $this autoGenerateFilter($v)
  * @method $this autoFillHeight($v)
+ * @method $this primaryField($v)
  */
 class CRUD extends Table
 {

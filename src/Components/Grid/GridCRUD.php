@@ -9,6 +9,7 @@ trait GridCRUD
     use GridFilter, GridActions;
 
     private CRUD $crud;
+    private string $crudName = "crud";
     protected array $columns = [];
 
     private bool $loadDataOnce = false;
@@ -22,6 +23,24 @@ trait GridCRUD
     {
         return $this->crud;
     }
+
+    /**
+     * @return string
+     */
+    public function getCrudName(): string
+    {
+        return $this->crudName;
+    }
+
+    /**
+     * @param string $crudName
+     */
+    public function setCrudName(string $crudName): void
+    {
+        $this->crudName = $crudName;
+    }
+
+
 
     /**
      *  添加列表项
@@ -75,7 +94,7 @@ trait GridCRUD
     {
 
         //
-        $this->crud->name("crud");
+        $this->crud->name($this->crudName);
 
         //数据来源API
         $api = $this->getIndexUrl(['_action' => 'getData']);

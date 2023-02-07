@@ -3,9 +3,12 @@
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
 use Closure;
+use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 use SmallRuralDog\AmisAdmin\Renderers\Date;
 use SmallRuralDog\AmisAdmin\Renderers\Each;
+use SmallRuralDog\AmisAdmin\Renderers\Flex;
 use SmallRuralDog\AmisAdmin\Renderers\Image;
+use SmallRuralDog\AmisAdmin\Renderers\Mapping;
 use SmallRuralDog\AmisAdmin\Renderers\Status;
 use SmallRuralDog\AmisAdmin\Renderers\Tpl;
 
@@ -86,12 +89,69 @@ trait ColumnDisplay
      * @param Closure<Status>|null $closure
      * @return ColumnDisplay|Column
      */
-    public function status(Closure $closure = null):self{
+    public function status(Closure $closure = null): self
+    {
         $status = Status::make();
         if ($closure) {
             $closure($status);
         }
         $this->useTableColumn($status);
+        return $this;
+    }
+
+    /**
+     * 数字渲染
+     */
+    public function number($numDigits = 2, $suffix = ""): self
+    {
+        $this->useTableColumn(Tpl::make()->tpl("\${FLOOR({$this->name},$numDigits)} $suffix"));
+        return $this;
+    }
+
+    /**
+     * mapping 映射渲染
+     */
+    public function mapping(array $map): self
+    {
+        $mapping = Mapping::make();
+
+        $mapping->map($map);
+
+        $this->useTableColumn($mapping);
+        return $this;
+    }
+
+    /**
+     * 多个字段显示
+     */
+    public function multipleDisplay(array $items = [], $column = true, Closure $closure = null)
+    {
+
+        $flex = Flex::make()->items($items);
+        if ($column) {
+            $flex->direction("column");
+        }
+        if ($closure) {
+            $closure($flex);
+        }
+        $items = data_get($flex, "items");
+
+
+        $newItems = array();
+
+        foreach ($items as $key => $item) {
+            if ($key <= 0) {
+                $newItems[] = $item;
+                continue;
+            }
+            if ($item instanceof BaseSchema && !property_exists($item, "className")) {
+                $item->className("mt-1");
+            }
+            $newItems[] = $item;
+        }
+        $flex->items($newItems);
+
+        $this->useTableColumn($flex);
         return $this;
     }
 

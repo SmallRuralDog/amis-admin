@@ -22,4 +22,10 @@ class InputDate extends FormBase
         $this->format("YYYY-MM-DD HH:mm:ss");
     }
 
+    public function datetime(): InputDate
+    {
+        $this->type = 'input-datetime';
+        return $this;
+    }
+
 }

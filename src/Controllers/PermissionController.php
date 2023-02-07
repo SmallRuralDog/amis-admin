@@ -233,11 +233,15 @@ class PermissionController extends AdminController
                 }
             }
         }
+
         $routes = collect($routes)->filter(function ($route) use ($contain) {
             return !in_array($route, $contain);
         })->values()->all();
         /**@var Permission $model */
         $model = config('amis-admin.database.permissions_model');
+
+
+
 
         foreach ($routes as $route) {
             $slug = str_replace(array('*', '/'), '', $route);

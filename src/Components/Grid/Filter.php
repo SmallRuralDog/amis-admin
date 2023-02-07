@@ -32,7 +32,7 @@ class Filter extends AmisForm
         $searchName = "search.$name";
 
         $item = new Item($searchName, $label);
-        $item->size('md');
+        $item->size('sm');
         $this->filterItems[] = $item;
         return $item;
     }

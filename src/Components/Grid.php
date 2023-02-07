@@ -37,6 +37,8 @@ class Grid implements JsonSerializable
         $this->actions = new Actions($this);
         $this->toolbar = new Toolbar($this);
 
+        $this->crud->columnsTogglable(false);
+
         $this->_action = (string)request('_action');
     }
 

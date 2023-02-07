@@ -5,6 +5,7 @@ namespace SmallRuralDog\AmisAdmin\Components\Grid;
 use SmallRuralDog\AmisAdmin\Components\Grid;
 use SmallRuralDog\AmisAdmin\Renderers\Action\AjaxAction;
 use SmallRuralDog\AmisAdmin\Renderers\Action\LinkAction;
+use SmallRuralDog\AmisAdmin\Renderers\Action\ReloadAction;
 use SmallRuralDog\AmisAdmin\Renderers\Button;
 
 class Toolbar
@@ -43,6 +44,10 @@ class Toolbar
         $link = admin_route($this->grid->getCreateUrl());
         return LinkAction::make()->label("新增")->level('primary')->icon('fa fa-add')->link($link);
 
+    }
+
+    private function buildReloadButton(): Button{
+        return ReloadAction::make()->target($this->grid->getCrudName())->icon('fa fa-refresh');
     }
 
     /**
@@ -118,7 +123,9 @@ class Toolbar
     private function initHeaderToolbar(): array
     {
         $res = collect([]);
+        $res->add($this->buildReloadButton());
         $res->add("bulkActions");
+        $res->add("pagination");
         return $res->toArray();
     }
 

@@ -21,4 +21,16 @@ namespace SmallRuralDog\AmisAdmin\Renderers\Form;
 class InputDateRange extends FormBase
 {
     public string $type = 'input-date-range';
+
+    public function __construct()
+    {
+        $this->format("YYYY-MM-DD HH:mm:ss");
+        $this->ranges(['today', 'yesterday', 'prevweek', 'thisweek', 'thismonth', 'prevmonth', '7daysago']);
+    }
+
+    public function datetime(): InputDateRange
+    {
+        $this->type = 'input-datetime-range';
+        return $this;
+    }
 }

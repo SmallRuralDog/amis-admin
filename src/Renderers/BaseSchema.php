@@ -17,6 +17,7 @@ use JsonSerializable;
  * @method $this visible($v)
  * @method $this visibleOn($v)
  * @method $this id($v)
+ * @method $this value($v)
  *
  * @method getValue($value) 给组件赋值时自定义处理
  * @method setValue($value) 组件赋值提交时自定义处理
