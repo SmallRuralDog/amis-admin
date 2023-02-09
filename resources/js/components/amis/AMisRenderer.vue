@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {ElMessage} from 'element-plus'
+import {ElMessage, ElNotification, ElMessageBox} from 'element-plus'
 import axios from "axios";
 //@ts-ignore
 const amis = window.amisRequire('amis/embed');
@@ -98,10 +98,24 @@ const build = () => {
                 }
             },
             notify: (type: any, msg: string) => {
-                console.log(type, msg)
-                ElMessage({
+                ElNotification({
                     message: msg,
+                    dangerouslyUseHTMLString: true,
                     type: type,
+                })
+            },
+            alert: (content: string) => {
+                ElMessage(content)
+            },
+            confirm: (content: string) => {
+                return ElMessageBox.confirm(content, "提示", {
+                    cancelButtonText: "取消",
+                    confirmButtonText: "确定",
+                    dangerouslyUseHTMLString: true,
+                }).then(() => {
+                    return true;
+                }).catch(() => {
+
                 })
             },
             affixOffsetTop: 48,
