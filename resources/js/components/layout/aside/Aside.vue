@@ -25,7 +25,7 @@ import {useMenuStore} from "@/stores/menu";
 import {useAmisAdminStore} from "@/stores/admin";
 
 import MeniItem from "@/components/layout/aside/MeniItem.vue";
-
+import {ElMenu, ElScrollbar} from 'element-plus'
 const {menuInfo} = useMenuStore()
 const {config} = useAmisAdminStore()
 

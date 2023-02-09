@@ -47,7 +47,7 @@ class Toolbar
     }
 
     private function buildReloadButton(): Button{
-        return ReloadAction::make()->target($this->grid->getCrudName())->icon('fa fa-refresh');
+        return ReloadAction::make()->target($this->grid->getCrudName())->icon('fa fa-refresh')->label("刷新");
     }
 
     /**
@@ -123,7 +123,7 @@ class Toolbar
     private function initHeaderToolbar(): array
     {
         $res = collect([]);
-        $res->add($this->buildReloadButton());
+        $res->add("reload");
         $res->add("bulkActions");
         $res->add("pagination");
         return $res->toArray();
@@ -178,6 +178,7 @@ class Toolbar
     private function initFooterToolbar(): array
     {
         $res = collect([]);
+        $res->add("statistics");
         $res->add("switch-per-page");
         $res->add("pagination");
         return $res->toArray();

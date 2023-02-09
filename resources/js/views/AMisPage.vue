@@ -16,7 +16,7 @@ import {onMounted, watch} from "vue";
 import AMisRenderer from "@/components/amis/AMisRenderer.vue";
 import {storeToRefs} from "pinia";
 import {usePagesStore} from "@/stores/pages";
-import ErrorPage from "@/views/ErrorPage.vue";
+import {ElAlert} from 'element-plus'
 
 const {thisPage} = storeToRefs(usePagesStore())
 const {getPageJson} = usePagesStore()

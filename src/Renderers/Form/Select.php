@@ -31,4 +31,10 @@ class Select extends FormOptions
         $this->joinValues(false)->extractValue(true);
     }
 
+    public function buttonGroupSelect()
+    {
+        $this->type("button-group-select");
+        return $this;
+    }
+
 }

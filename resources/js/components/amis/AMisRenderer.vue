@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
-
+import {ElMessage} from 'element-plus'
 import axios from "axios";
 //@ts-ignore
 const amis = window.amisRequire('amis/embed');
@@ -26,6 +26,7 @@ watch(() => props.amisJson, (json) => {
 
 
 const build = () => {
+
     amisScoped = amis.embed(el.value, props.amisJson, {}, {
             fetcher: ({
                           url, // 接口地址
@@ -95,6 +96,13 @@ const build = () => {
                 } else {
                     router.push(path)
                 }
+            },
+            notify: (type: any, msg: string) => {
+                console.log(type, msg)
+                ElMessage({
+                    message: msg,
+                    type: type,
+                })
             },
             affixOffsetTop: 48,
         }

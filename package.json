@@ -12,7 +12,7 @@
     "@element-plus/icons-vue": "^1.1.4",
     "@vueuse/core": "^8.3.1",
     "axios": "^0.27.2",
-    "element-plus": "^2.1.11",
+    "element-plus": "^2.2.29",
     "pinia": "^2.0.13",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14"
@@ -29,6 +29,7 @@
     "tailwindcss": "^3.0.24",
     "typescript": "~4.6.3",
     "unplugin-auto-import": "^0.7.1",
+    "unplugin-element-plus": "^0.6.0",
     "unplugin-vue-components": "^0.19.3",
     "vite": "^2.9.5",
     "vue-tsc": "^0.34.7"

@@ -6,11 +6,12 @@
                      @click="toggleCollapse">
                 <component is="fold"/>
             </el-icon>
+
             <div class="ml-3" v-if="!menuInfo.isMobile">
                 <AMisRenderer :amisJson="tool.left"/>
             </div>
             <div v-else class="ml-3">
-                <el-button type="text" @click="showHeaderToolbar=true">工具栏</el-button>
+                <el-button text @click="showHeaderToolbar=true">工具栏</el-button>
             </div>
         </div>
         <div class="flex items-center">
@@ -18,7 +19,8 @@
                 <AMisRenderer :amisJson="tool.right"/>
             </div>
         </div>
-        <el-drawer v-model="showHeaderToolbar" v-if="menuInfo.isMobile" direction="ttb" :show-close="false" :with-header="false">
+        <el-drawer v-model="showHeaderToolbar" v-if="menuInfo.isMobile" direction="ttb"
+                   :with-header="false">
             <div>
                 <AMisRenderer :amisJson="tool.left"/>
             </div>
@@ -35,6 +37,7 @@ import {useRouter} from "vue-router";
 import {onMounted, reactive, ref} from "vue";
 import {useGetToolbar} from "@/utils/api";
 import AMisRenderer from "@/components/amis/AMisRenderer.vue";
+import {ElButton, ElDrawer, ElIcon} from "element-plus";
 
 const {toggleCollapse, menuInfo} = useMenuStore()
 const router = useRouter()

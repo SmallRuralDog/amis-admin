@@ -19,6 +19,8 @@ use JsonSerializable;
  * @method $this id($v)
  * @method $this value($v)
  *
+ * @method $this onEvent($v) 配置事件
+ *
  * @method getValue($value) 给组件赋值时自定义处理
  * @method setValue($value) 组件赋值提交时自定义处理
  * @method onDelete($value) 删除时自定义处理
