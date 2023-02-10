@@ -109,8 +109,12 @@ const {config} = useAmisAdminStore()
     }
 
     .cxd-TextControl-input {
-        padding: 12px 8px;
+        background: white;
+        height: auto;
         font-size: 15px;
+        input{
+            height: 30px;
+        }
     }
 }
 </style>

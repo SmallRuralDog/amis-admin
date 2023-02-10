@@ -13,17 +13,19 @@
     "@vueuse/core": "^8.3.1",
     "axios": "^0.27.2",
     "element-plus": "^2.2.29",
-    "pinia": "^2.0.13",
-    "vue": "^3.2.33",
+    "pinia": "^2.0.30",
+    "vue": "^3.2.47",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
+    "@arco-design/web-vue": "^2.42.1",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@types/node": "^16.11.27",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vitejs/plugin-vue-jsx": "^1.3.10",
     "@vue/tsconfig": "^0.1.3",
     "autoprefixer": "^10.4.5",
+    "consola": "^2.15.3",
     "postcss": "^8.4.12",
     "sass": "^1.51.0",
     "tailwindcss": "^3.0.24",
@@ -31,7 +33,8 @@
     "unplugin-auto-import": "^0.7.1",
     "unplugin-element-plus": "^0.6.0",
     "unplugin-vue-components": "^0.19.3",
-    "vite": "^2.9.5",
+    "vite": "^2.9.15",
+    "vite-plugin-style-import": "^2.0.0",
     "vue-tsc": "^0.34.7"
   }
 }

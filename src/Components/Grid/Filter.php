@@ -6,6 +6,7 @@ use Closure;
 use SmallRuralDog\AmisAdmin\Components\Form\Item;
 use SmallRuralDog\AmisAdmin\Renderers\Button;
 use SmallRuralDog\AmisAdmin\Renderers\Form\AmisForm;
+use Str;
 
 /**
  * @method $this title($v)
@@ -30,6 +31,11 @@ class Filter extends AmisForm
     protected function addItem($name = '', $label = ''): Item
     {
         $searchName = "search.$name";
+        $label = str_replace("：", ":", $label);
+        if (!Str::of($label)->endsWith([":", "："])) {
+
+            $label .= ":";
+        }
 
         $item = new Item($searchName, $label);
         $item->size('sm');
