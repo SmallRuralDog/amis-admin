@@ -51,6 +51,11 @@ class Column
         $this->tableColumn = TableColumn::make()->name($name)->label($label);
     }
 
+    public static function make($name, $label)
+    {
+        return new static($name, $label);
+    }
+
 
     public function __call($name, $arguments)
     {

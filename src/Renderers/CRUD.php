@@ -56,4 +56,9 @@ class CRUD extends Table
 {
     public string $type = 'crud';
 
+    public function __construct()
+    {
+        $this->columnsTogglable(false);
+    }
+
 }

@@ -57,6 +57,11 @@ class Item
         $this->formItem = FormBase::make()->label($label)->name($name);
     }
 
+    public static function make($name, $label)
+    {
+        return new static($name, $label);
+    }
+
     public function __call($name, $arguments)
     {
         $this->formItem->$name(...$arguments);

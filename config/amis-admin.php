@@ -30,6 +30,7 @@ return [
             'title' => 'Amis文档'
         ]
     ],
+    'timezone' => 'Asia/Shanghai',//后台时区
     'bootstrap' => app_path('Admin/bootstrap.php'),
     'route' => [
         'domain' => null,
@@ -77,6 +78,9 @@ return [
             '_handle_upload_image_',
             '_handle_upload_file_',
             'view*',
+            "telescope",
+            "horizon",
+            "log-viewer",
         ],
     ],
     'upload' => [
