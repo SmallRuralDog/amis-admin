@@ -30,7 +30,7 @@ return [
             'title' => 'Amis文档'
         ]
     ],
-    'timezone' => null,//后台时区
+    'timezone' => 'Asia/Shanghai',//后台时区
     'bootstrap' => app_path('Admin/bootstrap.php'),
     'route' => [
         'domain' => null,

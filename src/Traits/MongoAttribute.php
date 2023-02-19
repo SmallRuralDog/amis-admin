@@ -4,7 +4,7 @@ namespace SmallRuralDog\AmisAdmin\Traits;
 
 trait MongoAttribute
 {
-    public function setAttribute($key, $value): void
+    public function setAttribute($key, $value):static
     {
         parent::setAttribute($key, $value);
         $type = data_get($this->casts, $key);
