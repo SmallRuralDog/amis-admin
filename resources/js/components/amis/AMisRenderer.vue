@@ -98,11 +98,38 @@ const build = () => {
                 }
             },
             notify: (type: any, msg: string) => {
-                ElNotification({
-                    message: msg,
-                    dangerouslyUseHTMLString: true,
-                    type: type,
-                })
+
+                let showType: 'message' | 'alert' | 'notice'
+                let showContent: string
+                try {
+                    const msgData = JSON.parse(msg)
+                    showType = msgData.type
+                    showContent = msgData.content
+                } catch (e) {
+                    showType = "message"
+                    showContent = msg
+                }
+                if (showType == "alert") {
+                    ElMessageBox({
+                        message: showContent,
+                        title: "提示",
+                        type: type,
+                        center: true
+                    })
+                } else if (showType == "message") {
+                    ElMessage({
+                        message: showContent,
+                        type: type,
+                    })
+                } else {
+                    ElNotification({
+                        message: showContent,
+                        dangerouslyUseHTMLString: true,
+                        type: type,
+                    })
+                }
+
+
             },
             alert: (content: string) => {
                 ElMessage(content)

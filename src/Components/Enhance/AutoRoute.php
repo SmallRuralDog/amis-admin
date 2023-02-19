@@ -25,4 +25,9 @@ class AutoRoute implements JsonSerializable
     {
         return $this->render();
     }
+
+    public function success($message = '操作成功'): AutoRouteResponse
+    {
+        return AutoRouteResponse::make($message);
+    }
 }

@@ -16,7 +16,7 @@ trait AutoRouteAction
      * @param string $method
      * @return array
      */
-    public function action(string $actionName, array $params = [], array $data = [], string $method = "post"): array
+    protected function action(string $actionName, array $params = [], array $data = [], string $method = "post"): array
     {
         $class = Crypt::encryptString($this::class);
         $d = [
