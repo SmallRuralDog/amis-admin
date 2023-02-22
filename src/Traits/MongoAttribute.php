@@ -24,6 +24,7 @@ trait MongoAttribute
             default:
                 break;
         }
+        return $this;
     }
 
     public function getAttribute($key)

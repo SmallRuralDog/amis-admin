@@ -74,7 +74,9 @@ class Grid implements JsonSerializable
         $this->page
             ->toolbar($this->toolbar->renderToolbar())
             ->body([
+                $this->renderHeader(),
                 $this->renderCRUD(),
+                $this->renderFooter(),
             ]);
 
         return $this->page;

@@ -2,6 +2,7 @@
 
 namespace SmallRuralDog\AmisAdmin\Components\Grid;
 
+use SmallRuralDog\AmisAdmin\Renderers\BaseSchema;
 use SmallRuralDog\AmisAdmin\Renderers\CRUD;
 
 trait GridCRUD
@@ -11,6 +12,8 @@ trait GridCRUD
     private CRUD $crud;
     private string $crudName = "crud";
     protected array $columns = [];
+    protected array $headers = [];
+    protected array $footers = [];
 
     private bool $loadDataOnce = false;
 
@@ -39,7 +42,6 @@ trait GridCRUD
     {
         $this->crudName = $crudName;
     }
-
 
 
     /**
@@ -87,6 +89,45 @@ trait GridCRUD
     {
         $this->loadDataOnce = $loadDataOnce;
         return $this;
+    }
+
+    /**
+     * 添加头部组建
+     * @param BaseSchema $header
+     * @return $this
+     */
+    public function header(BaseSchema $header){
+        $this->headers[] = $header;
+        return $this;
+    }
+
+    protected function renderHeader()
+    {
+        $header = [];
+        foreach ($this->headers as $item) {
+            $header[] = $item;
+        }
+        return $header;
+    }
+
+    /**
+     * 添加底部组建
+     * @param BaseSchema $footer
+     * @return $this
+     */
+    public function footer(BaseSchema $footer)
+    {
+        $this->footers[] = $footer;
+        return $this;
+    }
+
+    protected function renderFooter()
+    {
+        $footer = [];
+        foreach ($this->footers as $item) {
+            $footer[] = $item;
+        }
+        return $footer;
     }
 
 
