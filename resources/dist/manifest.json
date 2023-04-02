@@ -1,6 +1,6 @@
 {
   "resources/js/main.ts": {
-    "file": "assets/main.c648d542.js",
+    "file": "assets/main.71b0701d.js",
     "src": "resources/js/main.ts",
     "isEntry": true,
     "dynamicImports": [
@@ -13,45 +13,45 @@
     ]
   },
   "resources/js/components/layout/Layout.vue": {
-    "file": "assets/Layout.1c56f7d4.js",
+    "file": "assets/Layout.7b407a78.js",
     "src": "resources/js/components/layout/Layout.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AMisRenderer.03fce410.js",
+      "_pages.c075956e.js",
       "resources/js/main.ts"
     ],
     "css": [
       "assets/Layout.b81c5458.css"
     ]
   },
-  "_AMisRenderer.03fce410.js": {
-    "file": "assets/AMisRenderer.03fce410.js",
+  "_pages.c075956e.js": {
+    "file": "assets/pages.c075956e.js",
     "imports": [
       "resources/js/main.ts"
     ],
     "css": [
-      "assets/AMisRenderer.dc7491a0.css"
+      "assets/pages.66128da3.css"
     ]
   },
   "resources/js/views/AMisPage.vue": {
-    "file": "assets/AMisPage.c0c5e336.js",
+    "file": "assets/AMisPage.eba46379.js",
     "src": "resources/js/views/AMisPage.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/main.ts",
-      "_AMisRenderer.03fce410.js"
+      "_pages.c075956e.js"
     ],
     "css": [
       "assets/AMisPage.995c655b.css"
     ]
   },
   "resources/js/views/Login.vue": {
-    "file": "assets/Login.fc501b2a.js",
+    "file": "assets/Login.09db12ce.js",
     "src": "resources/js/views/Login.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/views/AMisPage.vue",
-      "_AMisRenderer.03fce410.js",
+      "_pages.c075956e.js",
       "resources/js/main.ts"
     ],
     "css": [

@@ -111,6 +111,28 @@ function arr2tree($list, $id = 'id', $pid = 'parent_id', $son = 'children')
     return $tree;
 }
 
+if (!function_exists('admin_jump')) {
+    function admin_jump($url, $type = 'url')
+    {
+        return response()->json([
+            'action' => 'jump',
+            'actionType' => $type,
+            'url' => $url
+        ]);
+    }
+}
+
+if (!function_exists('admin_toast')) {
+    function admin_toast($message, $type = 'success')
+    {
+        return response()->json([
+            'action' => 'toast',
+            'actionType' => $type,
+            'message' => $message
+        ]);
+    }
+}
+
 if (!function_exists('settings')) {
 
     function settings($key = null, $default = null)

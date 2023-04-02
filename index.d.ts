@@ -9,6 +9,11 @@ declare global {
         code: number
         data: T
         message?: string
+        action?: 'jump' | 'toast'|'renderPage'
+        actionType?: 'url' | 'route'
+        url?: string
+        showMenu?: boolean
+        showHeader?: boolean
     }
 
     interface AmisAdmin {

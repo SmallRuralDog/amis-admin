@@ -66,6 +66,15 @@ class AmisAdmin
         return Response::json($re_data, 200, $headers);
     }
 
+    public function renderPage($page, $showMenu = true, $showHeader = true)
+    {
+        $re_data['data'] = $page;
+        $re_data['action'] = "renderPage";
+        $re_data['showMenu'] = $showMenu;
+        $re_data['showHeader'] = $showHeader;
+        return $re_data;
+    }
+
 
     public function responseMessage($message = '', $code = 0): JsonResponse
     {

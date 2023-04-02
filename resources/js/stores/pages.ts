@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {computed, reactive, ref,getCurrentInstance} from "vue";
+import {computed, reactive, ref, getCurrentInstance} from "vue";
 import {useGetPageJson} from "@/utils/api";
 
 interface pageList {
@@ -14,8 +14,10 @@ export const usePagesStore = defineStore("pages", () => {
     const thisPage = reactive({
         loading: true,
         error: false,
-        errorMessage:"",
+        errorMessage: "",
         pageJson: null as any,
+        showMenu: true,
+        showHeader: true,
     })
 
 
@@ -32,6 +34,21 @@ export const usePagesStore = defineStore("pages", () => {
                 return
             }*/
             const res = await useGetPageJson(path)
+
+            if (res.action) {
+                if (res.action == 'jump' && res.url) {
+                    window.location.href = res.url
+                }
+                if (res.action == "renderPage") {
+                    thisPage.showHeader = res.showHeader ?? true
+                    thisPage.showMenu = res.showMenu ?? true
+                }
+            } else {
+                thisPage.showHeader = true
+                thisPage.showMenu = true
+            }
+
+
             pages[path] = res.data
             thisPage.pageJson = pages[path]
             thisPage.error = false
@@ -42,7 +59,7 @@ export const usePagesStore = defineStore("pages", () => {
             thisPage.error = true
             thisPage.loading = false
             // @ts-ignore
-            thisPage.errorMessage= e.message
+            thisPage.errorMessage = e.message
             internalInstance?.appContext.config.globalProperties.$Progress.fail();
         }
     }

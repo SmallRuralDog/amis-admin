@@ -17,6 +17,7 @@ Route::group([
     $router->get('/', [RootController::class, "index"]);
     $router->get('view', [RootController::class, "index"]);
     $router->get('view/{name}', [RootController::class, "index"])->where('name', '.*');
+
     $router->get('getMenu', [HandleController::class, "menu"])->name('amis-admin.getMenu');
     $router->get('getHeaderToolbar', [HandleController::class, 'headerToolbar'])->name('amis-admin.headerToolbar');
     $router->any('_handle_action_', [HandleController::class, 'action'])->name('amis-admin.handle-action');
