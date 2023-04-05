@@ -26,31 +26,4 @@ trait MongoAttribute
         }
         return $this;
     }
-
-    public function getAttribute($key)
-    {
-        parent::getAttribute($key);
-
-        $value = data_get($this->attributes, $key);
-
-        $type = data_get($this->casts, $key);
-
-        switch ($type) {
-            case "bool":
-            case "boolean":
-                $value = (bool)$value;
-                break;
-            case "int":
-            case "integer":
-                $value = (int)$value;
-                break;
-            case "float":
-            case "double":
-                $value = (float)$value;
-                break;
-            default:
-                break;
-        }
-        return $value;
-    }
 }
