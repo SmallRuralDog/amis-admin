@@ -48,7 +48,7 @@ function admin_route($path = ''): string
     $prefix = trim(config('amis-admin.route.prefix'));
     $path = str_replace($prefix . '/', '/', $path);
 
-    return Str::of($path)->finish('/')->start('/')->rtrim("/")->toString();
+    return (string)Str::of($path)->finish('/')->start('/')->rtrim("/");
 }
 
 
