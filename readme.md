@@ -1,8 +1,11 @@
 # Amis Admin
 `Amis Admin` 是一个 `Laravel` + `Amis` 开发的后台扩展，只需简单的代码即可搭建出一个功能强大的后台管理系统。
 
+[使用技巧](https://github.com/SmallRuralDog/amis-admin/wiki) ,由于没时间写文档,只能把一些使用技巧代码贴出来参考!
+
 [Amis Admin文档](https://www.yuque.com/smallruraldog/kghkg8) ｜
-[Amis文档](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)。
+[Amis文档](https://aisuda.bce.baidu.com/amis/zh-CN/docs/index)
+
 
 ## 什么是 amis
 [Amis](https://github.com/baidu/amis) 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。
