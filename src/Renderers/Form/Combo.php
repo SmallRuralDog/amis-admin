@@ -44,9 +44,25 @@ class Combo extends FormBase
     {
         if (is_array($value)) {
             foreach ($value as $key => $v) {
-                $component = collect($this->items)->firstWhere('name', $key);
-                if (is_object($component) && method_exists($component::class, 'getValue')) {
-                    data_set($value, $key, $component->getValue($v));
+
+                if (is_array($v)) {
+                    foreach ($v as $k => $item) {
+                        $component = collect($this->items)->firstWhere('name', $k);
+                        if (!is_object($component)) {
+                            $component = collect($this->items)->get($k);
+                        }
+                        if (is_object($component) && method_exists($component::class, 'getValue')) {
+                            data_set($value, $key . '.' . $k, $component->getValue($item));
+                        }
+                    }
+                } else {
+                    $component = collect($this->items)->firstWhere('name', $key);
+                    if (!is_object($component)) {
+                        $component = collect($this->items)->get($key);
+                    }
+                    if (is_object($component) && method_exists($component::class, 'getValue')) {
+                        data_set($value, $key, $component->getValue($v));
+                    }
                 }
             }
         }
@@ -57,9 +73,24 @@ class Combo extends FormBase
     {
         if (is_array($value)) {
             foreach ($value as $key => $v) {
-                $component = collect($this->items)->firstWhere('name', $key);
-                if (is_object($component) && method_exists($component::class, 'setValue')) {
-                    data_set($value, $key, $component->setValue($v));
+                if (is_array($v)) {
+                    foreach ($v as $k => $item) {
+                        $component = collect($this->items)->firstWhere('name', $k);
+                        if (!is_object($component)) {
+                            $component = collect($this->items)->get($k);
+                        }
+                        if (is_object($component) && method_exists($component::class, 'setValue')) {
+                            data_set($value, $key . '.' . $k, $component->setValue($item));
+                        }
+                    }
+                } else {
+                    $component = collect($this->items)->firstWhere('name', $key);
+                    if (!is_object($component)) {
+                        $component = collect($this->items)->get($key);
+                    }
+                    if (is_object($component) && method_exists($component::class, 'setValue')) {
+                        data_set($value, $key, $component->setValue($v));
+                    }
                 }
             }
         }
@@ -70,9 +101,21 @@ class Combo extends FormBase
     {
         if (is_array($value)) {
             foreach ($value as $key => $v) {
-                $component = collect($this->items)->firstWhere('name', $key);
-                if (is_object($component) && method_exists($component::class, 'onDelete')) {
-                    data_set($value, $key, $component->onDelete($v));
+                if (is_array($v)) {
+                    foreach ($v as $k => $item) {
+                        $component = collect($this->items)->firstWhere('name', $k);
+                        if (!is_object($component)) {
+                            $component = collect($this->items)->get($k);
+                        }
+                        if (is_object($component) && method_exists($component::class, 'onDelete')) {
+                            data_set($value, $key . '.' . $k, $component->onDelete($item));
+                        }
+                    }
+                } else {
+                    $component = collect($this->items)->firstWhere('name', $key);
+                    if (is_object($component) && method_exists($component::class, 'onDelete')) {
+                        data_set($value, $key, $component->onDelete($v));
+                    }
                 }
             }
         }
