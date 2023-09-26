@@ -21,7 +21,9 @@ class InstallCommand extends Command
 
     public function initDatabase(): void
     {
-        $this->call('migrate');
+        $this->call('migrate', [
+            '--path' => dirname(dirname(__DIR__)) . '/database/migrations',
+        ]);
         $userModel = config('amis-admin.database.users_model');
         if ($userModel::count() == 0) {
             if ($userModel::count() == 0) {
