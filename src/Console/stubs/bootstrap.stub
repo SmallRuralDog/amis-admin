@@ -1,6 +1,6 @@
 <?php
 
-$amisVersion = '3.0.0';
+$amisVersion = '6.0.0';
 AmisAdmin::css([
     'https://cdn.jsdelivr.net/npm/amis@'.$amisVersion.'/sdk/sdk.css',
     'https://cdn.jsdelivr.net/npm/amis@'.$amisVersion.'/sdk/helper.css',

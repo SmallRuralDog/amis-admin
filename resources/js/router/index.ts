@@ -1,28 +1,33 @@
-import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 
-const prefix = window.AmisAdmin.prefix
+//@ts-ignore
+const prefix = window.AmisAdmin.prefix;
 
 const router = createRouter({
-    history: createWebHistory(`${prefix}/view/`),
-    routes: [
+  history: createWebHistory(`${prefix}/view/`),
+  routes: [
+    {
+      path: "/",
+      name: "layout",
+      component: () => import("@/components/layout/Layout.vue"),
+      redirect: "home",
+      children: [
         {
-            path: '/',
-            name: 'layout',
-            component: () => import("@/components/layout/Layout.vue"),
-            redirect: 'home',
-            children: [
-                {
-                    path: "/:pathMatch(.*)*",
-                    component: () => import("@/views/AMisPage.vue"),
-                }
-            ]
+          path: "/:pathMatch(.*)*",
+          component: () => import("@/views/AMisPage.vue"),
         },
-        {
-            path: '/login',
-            name: 'login',
-            component: () => import("@/views/Login.vue")
-        }
-    ]
-})
+      ],
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("@/views/Login.vue"),
+    },
+  ],
+});
 
-export default router
+export default router;

@@ -1,33 +1,11 @@
 {
-    "extends": "@vue/tsconfig/tsconfig.web.json",
-    "include": [
-        "env.d.ts",
-        "index.d.ts",
-        "resources/js/**/*",
-        "resources/js/**/*.vue"
-    ],
-    "exclude": [
-        "node_modules/*"
-    ],
-    "compilerOptions": {
-        "lib": [
-            "es2017",
-        ],
-        "isolatedModules": false,
-        "skipLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "./resources/js/*"
-            ]
-        },
-        "types": [
-            "vite/client"
-        ]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
     },
-    "references": [
-        {
-            "path": "./tsconfig.vite-config.json"
-        }
-    ]
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
 }
