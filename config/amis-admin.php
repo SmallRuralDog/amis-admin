@@ -30,6 +30,11 @@ return [
             'title' => 'Amis文档'
         ]
     ],
+    'menu' => [
+        'backgroundColor' => '#fff',
+        'textColor' => '#333',
+        'activeTextColor' => '#333',
+    ],
     'timezone' => 'Asia/Shanghai',//后台时区
     'bootstrap' => app_path('Admin/bootstrap.php'),
     'route' => [

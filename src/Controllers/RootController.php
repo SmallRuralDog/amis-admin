@@ -2,7 +2,6 @@
 
 namespace SmallRuralDog\AmisAdmin\Controllers;
 
-use AmisAdmin;
 use App\Http\Controllers\Controller;
 
 class RootController extends Controller
@@ -19,6 +18,7 @@ class RootController extends Controller
             'loginDesc' => config('amis-admin.loginDesc'),
             'copyright' => config('amis-admin.copyright'),
             'footerLinks' => config('amis-admin.footerLinks'),
+            'menu' => config('amis-admin.menu'),
         ];
 
         return view('amis-admin::root', ['config' => $config]);
