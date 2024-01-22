@@ -1,4 +1,9 @@
-import { defineConfig, presetAttributify, presetUno } from "unocss";
+import {
+  defineConfig,
+  presetAttributify,
+  presetUno,
+  presetIcons,
+} from "unocss";
 import presetRemToPx from "@unocss/preset-rem-to-px";
 
 import transformerDirectives from "@unocss/transformer-directives";
@@ -13,6 +18,17 @@ export default defineConfig({
 
     presetRemToPx({
       baseFontSize: 4,
+    }),
+    presetIcons({
+      cdn: "https://esm.sh/",
+      scale: 1,
+      warn: true,
+      extraProperties: {
+        display: "inline-block",
+        "vertical-align": "middle",
+        width: "100%",
+        height: "100%",
+      },
     }),
   ],
   transformers: [

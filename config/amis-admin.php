@@ -31,9 +31,9 @@ return [
         ]
     ],
     'menu' => [
-        'backgroundColor' => '#fff',
-        'textColor' => '#333',
-        'activeTextColor' => '#333',
+        'backgroundColor' => '#111827',//菜单背景色
+        'textColor' => '#ffffff',//菜单文字颜色
+        'activeTextColor' => '#409eff',//菜单激活文字颜色
     ],
     'timezone' => 'Asia/Shanghai',//后台时区
     'bootstrap' => app_path('Admin/bootstrap.php'),

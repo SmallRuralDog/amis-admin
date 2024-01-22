@@ -1,7 +1,5 @@
 <template>
-  <div class="por">
-    <div ref="el"></div>
-  </div>
+  <div class="por" ref="el"></div>
 </template>
 
 <script setup lang="ts">

@@ -5,6 +5,7 @@
         v-if="!menuInfo.isMobile"
         :width="menuInfo.isCollapse ? '64px' : '180px'"
         class="transition-all"
+        :style="{ backgroundColor: config.menu?.backgroundColor ?? `#111827` }"
       >
         <Aside />
       </el-aside>
@@ -27,7 +28,7 @@
         </template>
         <el-main class="main-content">
           <el-scrollbar>
-            <div class="por"><router-view /></div>
+            <router-view />
           </el-scrollbar>
         </el-main>
       </el-container>
@@ -37,6 +38,7 @@
 
 <script setup lang="ts">
 const { menuInfo } = useMenuStore();
+const { config } = useAmisAdminStore();
 const { thisPage } = storeToRefs(usePagesStore());
 const { width } = useWindowSize();
 const initPage = () => {

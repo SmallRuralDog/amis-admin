@@ -10,6 +10,7 @@ declare module 'vue' {
     AMisRenderer: typeof import('./components/amis/AMisRenderer.vue')['default']
     Aside: typeof import('./components/layout/aside/Aside.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
